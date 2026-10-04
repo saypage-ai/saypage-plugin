@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "saypage": {
+      "type": "http",
+      "url": "https://api.saypage.ai/mcp"
+    }
+  }
+}

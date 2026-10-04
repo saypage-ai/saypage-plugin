@@ -1,0 +1,25 @@
+{
+  "name": "saypage",
+  "displayName": "SayPage",
+  "version": "1.0.0",
+  "description": "Build and host web pages (link in bio, menus, guides, recipe pages) on your own saypage.page address, send them by Instagram DM to followers who comment a keyword, and manage your Instagram comments, posts and insights from the conversation.",
+  "author": {
+    "name": "SayPage",
+    "email": "hello@saypage.ai",
+    "url": "https://saypage.ai"
+  },
+  "homepage": "https://saypage.ai",
+  "repository": "https://github.com/saypage-ai/saypage-plugin",
+  "license": "MIT",
+  "keywords": [
+    "instagram",
+    "link-in-bio",
+    "web-pages",
+    "comment-to-dm",
+    "creators"
+  ],
+  "icon": "./icon.png",
+  "documentationUrl": "https://saypage.ai/start",
+  "privacyPolicyUrl": "https://saypage.ai/privacy",
+  "termsOfServiceUrl": "https://saypage.ai/terms"
+}
