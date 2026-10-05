@@ -16,6 +16,9 @@ There is no dashboard: everything happens in the conversation.
   builds it.
 - **The SayPage connector** (`.mcp.json`): SayPage's remote MCP server at
   `https://api.saypage.ai/mcp`. You sign in with your SayPage account when you connect it.
+- **Two manifests for the same plugin**: `.claude-plugin/plugin.json` and `.mcp.json` for
+  Claude, `plugin.json` and `mcp.json` in the [Agent Plugins](https://agent-plugins.org)
+  format for ChatGPT, Codex and other clients.
 
 The plugin runs no code on your computer and stores nothing itself.
 

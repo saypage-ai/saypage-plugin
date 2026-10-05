@@ -77,6 +77,9 @@ create a second one for the same post and keyword.
   `opening_message` and a button (`opening_button_label`) → tapping it sends
   `link_message` with a button (`link_button_label`) to the page. Instagram requires this
   two-step flow.
+- That is the only way SayPage sends a DM: it cannot message followers in bulk, write to
+  someone first, or read the account's DMs. When the user asks for that, say so and offer
+  an automation instead.
 - `extra_link_buttons` adds up to 2 more buttons to that last message, under the page's
   button: each opens another published page of the user's site (`page_id`) or any web
   address (`url`), for example "Shop" or "YouTube". Offer it when the user wants followers
@@ -207,7 +210,7 @@ Every error says what is wrong: fix exactly that and try again. A page's problem
 |---|---|
 | Publishing is closed on this account | SayPage refused or took down several of the user's pages. Tell them; they can contest by replying to SayPage's email. Do not work around it |
 | Connect your Instagram professional account first | `connect_instagram` |
-| your plan publishes 1 page at a time | Unpublish another page; the plans page it links is information to share when it helps, not an upgrade pitch |
+| your plan publishes 1 page at a time | Tell the user which page is online. Only if they choose to take it offline for this one, `unpublish_page` that page, then publish again; never pick a page yourself. The plans page it links is information to share when it helps, not an upgrade pitch |
 | Publishing posts is optional and turned off | Tell the user; `get_instagram_publishing_link` only if they want it |
 | SayPage is not allowed to read insights | `connect_instagram` again and allow it |
 | Instagram has no comment … that @… can reach | The id is wrong, or the comment was deleted or is under another account's post: take ids from `list_instagram_comments` |

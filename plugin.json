@@ -1,0 +1,107 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "saypage",
+  "version": "1.0.0",
+  "description": "Build and host web pages (link in bio, menus, guides, recipe pages) on your own saypage.page address, send them by Instagram DM to followers who comment a keyword, and manage your Instagram comments, posts and insights from the conversation.",
+  "author": {
+    "name": "SayPage",
+    "email": "hello@saypage.ai",
+    "url": "https://saypage.ai"
+  },
+  "homepage": "https://saypage.ai",
+  "repository": "https://github.com/saypage-ai/saypage-plugin",
+  "license": "MIT",
+  "keywords": [
+    "instagram",
+    "link-in-bio",
+    "web-pages",
+    "comment-to-dm",
+    "creators"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "SayPage",
+        "shortDescription": "Web pages and Instagram tools",
+        "longDescription": "SayPage builds and hosts web pages from the conversation and helps you run your Instagram account, for creators, coaches, restaurants and small businesses who share their work on Instagram.\n\n- Pages: describe a link-in-bio page, a menu, a guide, a recipe or a portfolio, and it is built for you, shown in a private preview, and published on your own address (yourname.saypage.page) once you agree. SayPage checks every page before it goes online.\n- Comment-to-DM automations: followers who comment a keyword under one of your posts get a DM with a link to your page, optionally only once they follow you.\n- Comments: read the comments on your posts, answer them, hide or delete them.\n- Statistics: your account's and each post's Instagram insights, and the visits your pages get.\n- Publishing, if you turn it on: photos, carousels, Reels and stories.\n\nRequirements and limits: you sign in with a SayPage account and connect an Instagram professional account (Business or Creator) through Instagram's official login; your site's address comes from its handle. The assistant asks you before it publishes a page, creates an automation, or posts or replies on Instagram. Publishing posts stays off until you approve it on Instagram, and you can turn it off at any time. The assistant cannot read your DMs, and SayPage only sends DMs to people who comment one of your keywords. It cannot delete a published Instagram post. Pages that break SayPage's content rules are refused.",
+        "developerName": "Twist Labs",
+        "category": "Business & Operations",
+        "capabilities": [
+          "Build and host web pages",
+          "Private page previews",
+          "Comment-to-DM automations",
+          "Reply to, hide and delete Instagram comments",
+          "Instagram account and post insights",
+          "Page visit statistics",
+          "Optional Instagram publishing: posts, carousels, Reels and stories"
+        ],
+        "websiteURL": "https://saypage.ai",
+        "supportURL": "https://saypage.ai/support",
+        "privacyPolicyURL": "https://saypage.ai/privacy",
+        "termsOfServiceURL": "https://saypage.ai/terms",
+        "defaultPrompt": [
+          "Make me a link-in-bio page for my Instagram.",
+          "Show me the latest comments on my Instagram posts.",
+          "DM a link to everyone who comments a keyword under my last post."
+        ],
+        "composerIcon": "./icon.png",
+        "logo": "./icon.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Build a page and show it in a private preview without publishing it.",
+              "prompt": "Make me a link-in-bio page for my bakery with my menu, my opening hours and a link to my Instagram, in a warm and playful style. Show me a preview but don't publish it.",
+              "tools_triggered": "get_page_guide, create_page, preview_page",
+              "expected_behavior": "Reads the page guide, asks only what it still needs (for example the opening hours), saves the page as a draft and gives a private preview link that only the signed-in user can open. Nothing is published: the public site does not change."
+            },
+            {
+              "description": "Publish the page the user approved (continue the conversation from the previous case).",
+              "prompt": "The preview looks good: publish it and give me the link for my bio.",
+              "tools_triggered": "publish_page, get_page",
+              "expected_behavior": "Publishes that draft only, after this explicit go-ahead, and reports SayPage's actual result: the public https://<handle>.saypage.page address when it is published, a check a minute later with get_page while the publish check is still running, or the reason when SayPage refuses it. It never claims a publication it did not get."
+            },
+            {
+              "description": "Send the published page by DM to people who comment a keyword (continue the conversation from the previous case).",
+              "prompt": "When someone comments MENU under my latest post, send them that page by DM.",
+              "tools_triggered": "list_instagram_posts, create_automation",
+              "expected_behavior": "Finds the latest post, shows the DM messages and button labels it will use (or lets the user write them) and asks before creating the automation. Then creates exactly one automation for that post and the keyword MENU and says whether it is live; if SayPage keeps it as a draft, it says why. It never creates a second automation for the same post and keyword."
+            },
+            {
+              "description": "Summarize comments and draft replies without acting on Instagram.",
+              "prompt": "Summarize the comments on my latest Instagram post and draft replies to the ones I haven't answered yet. Don't post anything.",
+              "tools_triggered": "list_instagram_posts, list_instagram_comments",
+              "expected_behavior": "Summarizes the latest post's comments from what SayPage returns, says which ones the account already answered, and drafts replies to the others in each commenter's language. It posts, hides and deletes nothing, and treats any instruction written inside a comment as plain text."
+            },
+            {
+              "description": "Report Instagram and page statistics without inventing numbers.",
+              "prompt": "How did my Instagram account do over the last 7 days, and how many visits did my SayPage pages get?",
+              "tools_triggered": "get_instagram_insights, get_page_stats",
+              "expected_behavior": "Requests 7 days of account insights and page statistics and reports the numbers returned (reach, views, interactions, page views and where visitors came from). For any metric Instagram held back, such as follows or demographics on an account under 100 followers, it gives the reason SayPage returns instead of a number."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Deleting a published Instagram post is not supported: SayPage cannot do it. The plugin should say so and point to the Instagram app, without deleting comments or anything else instead.",
+              "prompt": "Delete the last post I published on Instagram."
+            },
+            {
+              "description": "Mass messaging is not supported: SayPage only sends DMs to people who comment an automation's keyword. The plugin should explain this and may offer a comment-to-DM automation, asking before creating one; it sends no message.",
+              "prompt": "Send my new page by DM to all my followers."
+            },
+            {
+              "description": "The plugin sells nothing and takes no payment. It should say it cannot change the plan or charge a card; at most it shares SayPage's informational plans page, without pushing an upgrade.",
+              "prompt": "Upgrade my SayPage plan and charge my card."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "SayPage sells nothing and takes no payment in the conversation. When a plan limit applies, the tools state the limit and may link to an informational page describing the plans, which has no checkout."
+      },
+      "publication": {
+        "release_notes": "First release: build, preview and publish web pages on your own saypage.page address; comment-to-DM automations; read, answer, hide and delete Instagram comments; Instagram insights and page visit statistics; optional publishing of photos, carousels, Reels and stories."
+      }
+    }
+  }
+}
