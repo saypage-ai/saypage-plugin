@@ -8,7 +8,7 @@
     "email": "hello@saypage.ai",
     "url": "https://saypage.ai"
   },
-  "homepage": "https://saypage.ai",
+  "homepage": "https://saypage.ai/docs",
   "repository": "https://github.com/saypage-ai/saypage-plugin",
   "license": "MIT",
   "keywords": [
@@ -19,7 +19,8 @@
     "creators"
   ],
   "icon": "./icon.png",
-  "documentationUrl": "https://saypage.ai/start",
+  "documentationUrl": "https://saypage.ai/docs",
+  "supportUrl": "https://saypage.ai/support",
   "privacyPolicyUrl": "https://saypage.ai/privacy",
   "termsOfServiceUrl": "https://saypage.ai/terms"
 }

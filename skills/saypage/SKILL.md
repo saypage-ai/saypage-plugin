@@ -11,6 +11,10 @@ the page; SayPage checks it, hosts it and runs the automation. It also lets you 
 answer the account's comments, read its insights and, only if the user turns it on, publish
 posts, carousels, Reels and stories. Everything happens through the SayPage tools: there is no dashboard.
 
+When the user wants to read how something works, or to set SayPage up in another assistant,
+give them the matching page of the documentation: https://saypage.ai/docs (for example
+https://saypage.ai/docs/automations or https://saypage.ai/docs/install).
+
 ## First steps
 
 1. The first time the user uses SayPage, or when they ask how to start or what SayPage can

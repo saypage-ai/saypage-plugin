@@ -48,10 +48,19 @@ comment of followers who trigger an automation in order to send them the DM. Say
 read your conversations. Details are in the [privacy policy](https://saypage.ai/privacy) and
 the [terms](https://saypage.ai/terms).
 
+## Documentation
+
+Everything SayPage does, step by step: [saypage.ai/docs](https://saypage.ai/docs). Start with
+[Getting started](https://saypage.ai/docs/getting-started) and
+[Install the connector](https://saypage.ai/docs/install) (Claude, Claude Code, ChatGPT and other
+MCP clients); the [MCP tools reference](https://saypage.ai/docs/tools) lists every tool and what
+it changes.
+
 ## Support
 
-Write to [hello@saypage.ai](mailto:hello@saypage.ai). Setup guide:
-[saypage.ai/start](https://saypage.ai/start).
+Write to [hello@saypage.ai](mailto:hello@saypage.ai), or see
+[Help](https://saypage.ai/support) and
+[Troubleshooting](https://saypage.ai/docs/troubleshooting).
 
 ## License
 
