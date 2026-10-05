@@ -9,8 +9,11 @@ There is no dashboard: everything happens in the conversation.
 
 ## What's in this plugin
 
-- **The SayPage skill** (`skills/saypage/SKILL.md`): how to write a page SayPage accepts,
-  the publishing workflow, comment-to-DM automations, and the Instagram tools.
+- **The SayPage skill** (`skills/saypage/SKILL.md`): how to work with SayPage, the
+  publishing workflow, comment-to-DM automations, and the Instagram tools. For pages, it has
+  your assistant read SayPage's page guide from the connector, which always matches the
+  checks SayPage runs today: it asks you what the page is for and the style you want, then
+  builds it.
 - **The SayPage connector** (`.mcp.json`): SayPage's remote MCP server at
   `https://api.saypage.ai/mcp`. You sign in with your SayPage account when you connect it.
 
