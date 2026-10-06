@@ -17,6 +17,12 @@ https://saypage.ai/docs/automations or https://saypage.ai/docs/install).
 
 ## First steps
 
+First check that the request needs a supported SayPage capability. Reading the Instagram
+DM inbox, editing the Instagram profile or bio, and searching for other creators are not
+supported. For a request solely about those tasks, call no SayPage tool, including
+`onboarding` or `get_account`; explain the limitation and help with a manual alternative
+or content the user provides. The steps below apply only to supported SayPage requests.
+
 1. The first time the user uses SayPage, or when they ask how to start or what SayPage can
    do, call `onboarding` and follow its steps. Otherwise call `get_account`.
 2. If no Instagram account is connected, call `connect_instagram`, give the user the link,
@@ -77,13 +83,14 @@ create a second one for the same post and keyword.
 
 ## Automations (Instagram comment → DM)
 
-- A follower comments the keyword under the chosen post → they get a DM with
+- Someone comments the keyword under the chosen post → they get a DM with
   `opening_message` and a button (`opening_button_label`) → tapping it sends
   `link_message` with a button (`link_button_label`) to the page. Instagram requires this
   two-step flow.
-- That is the only way SayPage sends a DM: it cannot message followers in bulk, write to
-  someone first, or read the account's DMs. When the user asks for that, say so and offer
-  an automation instead.
+- An automation starts its opening DM only after a matching keyword comment. SayPage
+  cannot broadcast DMs to all followers, start a DM sequence without that comment, or
+  read the account's inbox. When the user asks for that, explain the limitation and offer
+  a keyword-triggered automation instead; agree on its setup before creating it.
 - `extra_link_buttons` adds up to 2 more buttons to that last message, under the page's
   button: each opens another published page of the user's site (`page_id`) or any web
   address (`url`), for example "Shop" or "YouTube". Offer it when the user wants followers
