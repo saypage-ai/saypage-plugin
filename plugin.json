@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "saypage",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Build and host web pages (link in bio, menus, guides, recipe pages) on your own saypage.page address, send them by Instagram DM to followers who comment a keyword, and manage your Instagram comments, posts and insights from the conversation.",
   "author": {
     "name": "Twist Labs",
@@ -21,7 +21,7 @@
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "SayPage — for Instagram",
+        "displayName": "Saypage",
         "shortDescription": "Web pages and Instagram tools",
         "longDescription": "SayPage builds and hosts web pages from the conversation and helps you run your Instagram account, for creators, coaches, restaurants and small businesses who share their work on Instagram.\n\n- Pages: describe a link-in-bio page, a menu, a guide, a recipe or a portfolio, and it is built for you, shown in a private preview, and published on your own address (yourname.saypage.page) once you agree. SayPage checks every page before it goes online.\n- Comment-to-DM automations: followers who comment a keyword under one of your posts get a DM with a link to your page, optionally only once they follow you.\n- Comments: read the comments on your posts, answer them, hide or delete them.\n- Statistics: your account's and each post's Instagram insights, and the visits your pages get.\n- Publishing, if you turn it on: photos, carousels, Reels and stories.\n\nRequirements and limits: you sign in with a SayPage account and connect an Instagram professional account (Business or Creator) through Instagram's official login; your site's address comes from its handle. The assistant asks you before it publishes a page, creates an automation, or posts or replies on Instagram. Publishing posts stays off until you approve it on Instagram, and you can turn it off at any time. The assistant cannot read your DMs, and SayPage only sends DMs to people who comment one of your keywords. It cannot delete a published Instagram post. Pages that break SayPage's content rules are refused.\n\nDocumentation: https://saypage.ai/docs",
         "developerName": "Twist Labs",
@@ -44,6 +44,7 @@
           "Show me the latest comments on my Instagram posts.",
           "DM a link to everyone who comments a keyword under my last post."
         ],
+        "brandColor": "#E02F8B",
         "composerIcon": "./assets/icon.png",
         "logo": "./assets/icon.png"
       },
