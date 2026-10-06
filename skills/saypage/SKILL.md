@@ -105,6 +105,8 @@ create a second one for the same post and keyword.
   not); accents and emoji must match exactly. Replies under other comments count, the
   account's own comments never do, and when several automations on a post match, the
   longest keyword wins. The keyword is saved in lowercase (`keyword_note` says so).
+  Someone whose DMs are still under way gets nothing new for another comment; once their
+  sequence has ended, a new comment starts a new one.
 - `update_automation` changes the keyword or any message of an existing automation (live
   ones stay live); omitted fields are kept. Use it instead of deleting and recreating.
 - Omit `provider_media_id` to arm the automation for the account's **next** post: it binds
