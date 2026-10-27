@@ -1,8 +1,8 @@
 {
   "name": "saypage",
-  "displayName": "SayPage",
-  "version": "1.0.7",
-  "description": "Build and host web pages (link in bio, menus, guides, recipe pages) on your own saypage.page address, send them by Instagram DM to followers who comment a keyword, and manage your Instagram comments, posts and insights from the conversation.",
+  "displayName": "Saypage",
+  "version": "1.0.8",
+  "description": "Build and host web pages (link in bio, menus, guides, recipe pages) on your own saypage.page address, send them by Instagram DM to followers who comment a keyword, manage your Instagram comments, posts and insights from the conversation, and write Reels, captions, carousels, stories and weekly content calendars.",
   "author": {
     "name": "Twist Labs",
     "email": "hello@saypage.ai",
@@ -16,7 +16,9 @@
     "link-in-bio",
     "web-pages",
     "comment-to-dm",
-    "creators"
+    "creators",
+    "reels",
+    "captions"
   ],
   "icon": "./assets/icon.png",
   "documentationUrl": "https://saypage.ai/docs",

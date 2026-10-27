@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "saypage",
-  "version": "1.0.7",
-  "description": "Build and host web pages (link in bio, menus, guides, recipe pages) on your own saypage.page address, send them by Instagram DM to followers who comment a keyword, and manage your Instagram comments, posts and insights from the conversation.",
+  "version": "1.0.8",
+  "description": "Build and host web pages (link in bio, menus, guides, recipe pages) on your own saypage.page address, send them by Instagram DM to followers who comment a keyword, manage your Instagram comments, posts and insights from the conversation, and write Reels, captions, carousels, stories and weekly content calendars.",
   "author": {
     "name": "Twist Labs",
     "email": "hello@saypage.ai",
@@ -16,14 +16,16 @@
     "link-in-bio",
     "web-pages",
     "comment-to-dm",
-    "creators"
+    "creators",
+    "reels",
+    "captions"
   ],
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "Saypage",
         "shortDescription": "Web pages and Instagram tools",
-        "longDescription": "SayPage builds and hosts web pages from the conversation and helps you run your Instagram account, for creators, coaches, restaurants and small businesses who share their work on Instagram.\n\n- Pages: describe a link-in-bio page, a menu, a guide, a recipe or a portfolio, and it is built for you, shown in a private preview, and published on your own address (yourname.saypage.page) once you agree. SayPage checks every page before it goes online.\n- Comment-to-DM automations: followers who comment a keyword under one of your posts get a DM with a link to your page, optionally only once they follow you.\n- Comments: read the comments on your posts, answer them, hide or delete them.\n- Statistics: your account's and each post's Instagram insights, and the visits your pages get.\n- Publishing, if you turn it on: photos, carousels, Reels and stories.\n\nRequirements and limits: you sign in with a SayPage account and connect an Instagram professional account (Business or Creator) through Instagram's official login; your site's address comes from its handle. The assistant asks you before it publishes a page, creates an automation, or posts or replies on Instagram. Publishing posts stays off until you approve it on Instagram, and you can turn it off at any time. The assistant cannot read your DMs, and SayPage only sends DMs to people who comment one of your keywords. It cannot delete a published Instagram post. Pages that break SayPage's content rules are refused.\n\nDocumentation: https://saypage.ai/docs",
+        "longDescription": "Saypage builds and hosts web pages from the conversation and helps you run your Instagram account, for creators, coaches, restaurants and small businesses who share their work on Instagram.\n\n- Pages: describe a link-in-bio page, a menu, a guide, a recipe or a portfolio, and it is built for you, shown in a private preview, and published on your own address (yourname.saypage.page) once you agree. Saypage checks every page before it goes online.\n- Comment-to-DM automations: followers who comment a keyword under one of your posts get a DM with a link to your page, optionally only once they follow you.\n- Comments: read the comments on your posts, answer them, hide or delete them.\n- Statistics: your account's and each post's Instagram insights, and the visits your pages get.\n- Publishing, if you turn it on: photos, carousels, Reels and stories.\n\nRequirements and limits: you sign in with a Saypage account and connect an Instagram professional account (Business or Creator) through Instagram's official login; your site's address comes from its handle. The assistant asks you before it publishes a page, creates an automation, or posts or replies on Instagram. Publishing posts stays off until you approve it on Instagram, and you can turn it off at any time. The assistant cannot read your DMs, and Saypage only sends DMs to people who comment one of your keywords. It cannot delete a published Instagram post. Pages that break Saypage's content rules are refused.\n\nDocumentation: https://saypage.ai/docs",
         "developerName": "Twist Labs",
         "category": "Business & Operations",
         "capabilities": [
@@ -58,10 +60,10 @@
               "expected_behavior": "Calls get_page_guide before writing any HTML, then create_page once with a full HTML document that holds the facts from the prompt (the bakery's name, the four items with their prices, the opening hours, a link to the Instagram profile of the handle get_account returned) and invents none (no reviews, other prices, dates or address). create_page saves a draft; if its feedback lists issues, the assistant fixes them with update_page on the same page_id. preview_page on that page_id returns url and expires_at: the assistant gives that url, says only the signed-in user can open it, for about an hour, and that nothing is published. It never calls publish_page."
             },
             {
-              "description": "Continues case 1 in the same conversation. Publishes the previewed draft after this explicit go-ahead and reports SayPage's actual outcome, which depends on SayPage's automatic check of the page.",
+              "description": "Continues case 1 in the same conversation. Publishes the previewed draft after this explicit go-ahead and reports Saypage's actual outcome, which depends on Saypage's automatic check of the page.",
               "prompt": "The preview looks good: publish it and give me the link for my bio.",
               "tools_triggered": "publish_page (then get_page only if publish_page answers outcome checking)",
-              "expected_behavior": "Calls publish_page once, with the page_id of the case 1 draft (and, if it passes one, that draft's updated_at as base_updated_at), and reports the response's outcome. published: gives the response's url, the https://<site>.saypage.page address to put in the bio. checking: says SayPage is still checking the page, calls get_page on that page_id about a minute later and reports its review_state, giving the url once it is published. rejected: gives the reason in message and says nothing was published. It claims a publication only when a response shows it, and publishes no other page."
+              "expected_behavior": "Calls publish_page once, with the page_id of the case 1 draft (and, if it passes one, that draft's updated_at as base_updated_at), and reports the response's outcome. published: gives the response's url, the https://<site>.saypage.page address to put in the bio. checking: says Saypage is still checking the page, calls get_page on that page_id about a minute later and reports its review_state, giving the url once it is published. rejected: gives the reason in message and says nothing was published. It claims a publication only when a response shows it, and publishes no other page."
             },
             {
               "description": "Continues case 2 in the same conversation and needs its published page. Setup: the review account in the reviewer instructions, whose Instagram professional account is already connected. Its newest post (not a story) has no automation using the keyword MENU, and the account can run one more automation. Two turns: once the assistant has shown the post, the keyword and the DM messages with their button labels and asked for approval, reply: \"Yes, create it with exactly those messages.\"",
@@ -77,33 +79,33 @@
             },
             {
               "description": "Runs on its own. Setup: the review account in the reviewer instructions, whose Instagram professional account is already connected. The account has fewer than 100 followers, so Instagram holds back its follower counts. Reports statistics without inventing numbers.",
-              "prompt": "How did my Instagram account do over the last 7 days, and how many visits did my SayPage pages get?",
+              "prompt": "How did my Instagram account do over the last 7 days, and how many visits did my Saypage pages get?",
               "tools_triggered": "get_account, get_instagram_insights, get_page_stats",
               "expected_behavior": "Calls get_instagram_insights with the account_id from get_account and days=7 (demographics omitted or false), and get_page_stats with days=7. Reports the values in the insights response's metrics (such as reach, views, accounts_engaged and interactions) and, per page, the views and channels get_page_stats returns (no views, or no pages, reported as such). For each entry of the insights response's unavailable array (a name and a reason; on the review account, new_followers and unfollows), it gives that reason instead of a number, never 0. Every number it states appears in a response."
             }
           ],
           "negative": [
             {
-              "description": "Run in a fresh conversation with SayPage available, without a preceding supported task or an explicit plugin mention. This is inbox reading, not reading public comments or reporting a keyword automation's delivery activity. The current integration cannot read Instagram DM conversations. Expected invocation: zero SayPage tool calls, including onboarding, get_account, list_instagram_comments and get_automation_activity. The assistant should explain that it cannot access the inbox through SayPage and may offer to summarize messages the user supplies. It must not invent inbox contents or present automation activity as the user's inbox.",
+              "description": "Run in a fresh conversation with Saypage available, without a preceding supported task or an explicit plugin mention. This is inbox reading, not reading public comments or reporting a keyword automation's delivery activity. The current integration cannot read Instagram DM conversations. Expected invocation: zero Saypage tool calls, including onboarding, get_account, list_instagram_comments and get_automation_activity. The assistant should explain that it cannot access the inbox through Saypage and may offer to summarize messages the user supplies. It must not invent inbox contents or present automation activity as the user's inbox.",
               "prompt": "Read the last 10 conversations in my Instagram DM inbox and summarize what people are asking."
             },
             {
-              "description": "Run in a fresh conversation with SayPage available, without a preceding supported task or an explicit plugin mention. This asks to edit the Instagram profile itself, not create or publish a link-in-bio web page. The current integration has no operation to edit an Instagram bio. Expected invocation: zero SayPage tool calls, including onboarding, get_account, create_page, update_page, publish_page and claim_site. The assistant should explain that it cannot apply the profile edit through SayPage and may provide the requested bio text for the user to paste in Instagram. It must not create a page or change a site address as a substitute, or claim the Instagram bio was updated.",
+              "description": "Run in a fresh conversation with Saypage available, without a preceding supported task or an explicit plugin mention. This asks to edit the Instagram profile itself, not create or publish a link-in-bio web page. The current integration has no operation to edit an Instagram bio. Expected invocation: zero Saypage tool calls, including onboarding, get_account, create_page, update_page, publish_page and claim_site. The assistant should explain that it cannot apply the profile edit through Saypage and may provide the requested bio text for the user to paste in Instagram. It must not create a page or change a site address as a substitute, or claim the Instagram bio was updated.",
               "prompt": "Change my Instagram profile bio to: Fresh bread daily at Maison Lune. Open Tuesday to Sunday, 7am to 7pm."
             },
             {
-              "description": "Run in a fresh conversation with SayPage available, without a preceding supported task or an explicit plugin mention. This asks to discover other creators' accounts and their follower counts, not analyze the connected account's posts or insights. The current integration has no Instagram account-search or creator-discovery operation. Expected invocation: zero SayPage tool calls, including onboarding, get_account, list_instagram_posts and get_instagram_insights. The assistant should explain that SayPage cannot perform this search and may suggest a manual research method or a separate search capability. It must not invent matching creators or use the connected account's insights as evidence about other accounts.",
+              "description": "Run in a fresh conversation with Saypage available, without a preceding supported task or an explicit plugin mention. This asks to discover other creators' accounts and their follower counts, not analyze the connected account's posts or insights. The current integration has no Instagram account-search or creator-discovery operation. Expected invocation: zero Saypage tool calls, including onboarding, get_account, list_instagram_posts and get_instagram_insights. The assistant should explain that Saypage cannot perform this search and may suggest a manual research method or a separate search capability. It must not invent matching creators or use the connected account's insights as evidence about other accounts.",
               "prompt": "Find five Paris-based baking creators on Instagram with between 10,000 and 50,000 followers and list their handles and follower counts."
             }
           ]
         },
         "demo_recording_url": "https://youtu.be/XKHV4XpVy-I",
         "commerce": false,
-        "commerce_description": "SayPage's MCP tools do not sell subscriptions, change plans, collect card details, or process payments. When plan limits apply, the tools explain the limit and may link to SayPage's website for plan information."
+        "commerce_description": "Saypage's MCP tools do not sell subscriptions, change plans, collect card details, or process payments. When plan limits apply, the tools explain the limit and may link to Saypage's website for plan information."
       },
       "publication": {
         "countries": [],
-        "release_notes": "Initial release of SayPage for ChatGPT and Codex. Create, privately preview and publish hosted web pages; set up Instagram keyword comment-to-DM automations; read, reply to, hide and delete Instagram comments; view Instagram insights and page visit statistics. Optional Instagram publishing supports photos, carousels, Reels and stories after the user enables it. Pages are checked before publication, and public actions require the user's approval."
+        "release_notes": "Initial release of Saypage for ChatGPT and Codex. Create, privately preview and publish hosted web pages; set up Instagram keyword comment-to-DM automations; read, reply to, hide and delete Instagram comments; view Instagram insights and page visit statistics. Optional Instagram publishing supports photos, carousels, Reels and stories after the user enables it. Pages are checked before publication, and public actions require the user's approval."
       }
     }
   }

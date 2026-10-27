@@ -1,29 +1,29 @@
 ---
 name: saypage
-description: Design, build, host and share beautiful web pages with SayPage (link-in-bio pages, menus, guides, recipe pages, portfolios), send them to Instagram followers who comment a keyword, and manage the user's Instagram account (read and answer comments, read insights, and, once the user turns it on, publish posts, carousels, Reels and stories). Use whenever the user wants a web page online, a Linktree replacement, an Instagram comment-to-DM automation, help with their Instagram comments, posts or statistics, and the SayPage tools are connected.
+description: Design, build, host and share beautiful web pages with Saypage (link-in-bio pages, menus, guides, recipe pages, portfolios), send them to Instagram followers who comment a keyword, and manage the user's Instagram account (read and answer comments, read insights, and, once the user turns it on, publish posts, carousels, Reels and stories). Use whenever the user wants a web page online, a Linktree replacement, an Instagram comment-to-DM automation, help with their Instagram comments, posts or statistics, and the Saypage tools are connected.
 ---
 
-# SayPage
+# Saypage
 
-SayPage hosts the user's web pages on their own address (`https://<name>.saypage.page/…`)
+Saypage hosts the user's web pages on their own address (`https://<name>.saypage.page/…`)
 and sends them by Instagram DM to followers who comment a keyword under a post. You design
-the page; SayPage checks it, hosts it and runs the automation. It also lets you read and
+the page; Saypage checks it, hosts it and runs the automation. It also lets you read and
 answer the account's comments, read its insights and, only if the user turns it on, publish
-posts, carousels, Reels and stories. Everything happens through the SayPage tools: there is no dashboard.
+posts, carousels, Reels and stories. Everything happens through the Saypage tools: there is no dashboard.
 
-When the user wants to read how something works, or to set SayPage up in another assistant,
+When the user wants to read how something works, or to set Saypage up in another assistant,
 give them the matching page of the documentation: https://saypage.ai/docs (for example
 https://saypage.ai/docs/automations or https://saypage.ai/docs/install).
 
 ## First steps
 
-First check that the request needs a supported SayPage capability. Reading the Instagram
+First check that the request needs a supported Saypage capability. Reading the Instagram
 DM inbox, editing the Instagram profile or bio, and searching for other creators are not
-supported. For a request solely about those tasks, call no SayPage tool, including
+supported. For a request solely about those tasks, call no Saypage tool, including
 `onboarding` or `get_account`; explain the limitation and help with a manual alternative
-or content the user provides. The steps below apply only to supported SayPage requests.
+or content the user provides. The steps below apply only to supported Saypage requests.
 
-1. The first time the user uses SayPage, or when they ask how to start or what SayPage can
+1. The first time the user uses Saypage, or when they ask how to start or what Saypage can
    do, call `onboarding` and follow its steps. Otherwise call `get_account`.
 2. If no Instagram account is connected, call `connect_instagram`, give the user the link,
    and wait until they say they are done (then `get_account` again). No page can be
@@ -39,17 +39,21 @@ or content the user provides. The steps below apply only to supported SayPage re
 
 **Before you create or redesign a page, call `get_page_guide` and follow it.** Call it once
 in the conversation before you write any page HTML, even for a small edit: it has every
-rule SayPage checks, and pages that break them are refused. For a new page or a new look,
+rule Saypage checks, and pages that break them are refused. For a new page or a new look,
 it has you ask the user what the page is for, then which style they want, before writing
-any HTML: a SayPage page is meant to be beautiful, animated and made for this person, well
+any HTML: a Saypage page is meant to be beautiful, animated and made for this person, well
 beyond a list of links.
 
 In short: `create_page(html, path)` saves a **draft** (nothing is public; fix what
 `feedback.issues` lists with `update_page`), `preview_page` gives a private link only the
-user can open, and `publish_page` puts it online, **only once the user agrees**. SayPage
-checks every publication first: `published`, `rejected` (with the reason; the previous
+user can open, and `publish_page` puts it online, **only once the user agrees**. Saypage
+checks every page before it goes live: `published`, `rejected` (with the reason; the previous
 version stays online) or `checking` (read `get_page` a minute later). The live page only
-changes on `publish_page`.
+changes on `publish_page`. With a shell, keep the page in a file and upload it:
+`create_page` / `update_page` without `html` return the `curl` command to run. Each page or
+new version that goes live counts toward the plan's page updates a month
+(`plan.limits.monthly_publish_limit`, 10 on the free plan; refusals don't count): make every
+change the user asks for in the draft, then publish once.
 
 To send a page on Instagram: `list_instagram_posts`, pick the post with the user, choose a
 keyword, agree on the DM wording with them (see "Automations"), then **ask the user before**
@@ -69,15 +73,15 @@ create a second one for the same post and keyword.
 - **Chat apps without a shell**: `request_upload_link()` returns a link;
   the user opens it in a browser and adds photos. Then `list_images()` gives each image's
   `reference`.
-- JPEG, PNG or WebP, up to 5 MB each; an account holds 200 images, 250 MB in all. SayPage
+- JPEG, PNG or WebP, up to 5 MB each; an account holds 200 images, 250 MB in all. Saypage
   re-encodes every image (JPEG, or PNG when it has transparency) and serves it from the
   page's own address.
 - `list_images` says which pages use each image (`used_by`). `delete_image` removes an
   image no page uses, to make room: ask the user first. While a page (draft or online)
   still uses it, remove it from that page and save or publish the page first. A deleted
   image frees its room about half an hour later.
-- SayPage's automatic moderation checks every image when it is uploaded: a refused image is
-  never served (SayPage keeps it privately for 30 days to review its checks), and the error
+- Saypage's automatic moderation checks every image when it is uploaded: a refused image is
+  never served (Saypage keeps it privately for 30 days to review its checks), and the error
   says why. Tell the user, and suggest another image. If the check
   is briefly unavailable, confirm the upload again a minute later.
 
@@ -87,7 +91,7 @@ create a second one for the same post and keyword.
   `opening_message` and a button (`opening_button_label`) → tapping it sends
   `link_message` with a button (`link_button_label`) to the page. Instagram requires this
   two-step flow.
-- An automation starts its opening DM only after a matching keyword comment. SayPage
+- An automation starts its opening DM only after a matching keyword comment. Saypage
   cannot broadcast DMs to all followers, start a DM sequence without that comment, or
   read the account's inbox. When the user asks for that, explain the limitation and offer
   a keyword-triggered automation instead; agree on its setup before creating it.
@@ -114,8 +118,10 @@ create a second one for the same post and keyword.
   longest keyword wins. The keyword is saved in lowercase (`keyword_note` says so).
   Someone whose DMs are still under way gets nothing new for another comment; once their
   sequence has ended, a new comment starts a new one.
-- `update_automation` changes the keyword or any message of an existing automation (live
-  ones stay live); omitted fields are kept. Use it instead of deleting and recreating.
+- `update_automation` changes the keyword, any message, the link (`page_id` or `url`) or
+  the post (`provider_media_id`) of an existing automation (live ones stay live); omitted
+  fields are kept. To move an automation to a new Reel, update it: deleting and recreating
+  loses its history and stats.
 - Omit `provider_media_id` to arm the automation for the account's **next** post: it binds
   to the first post published after `activate_automation`, when that post gets its first
   comment (`status: waiting` until then).
@@ -128,15 +134,15 @@ create a second one for the same post and keyword.
   (not per person). For who got what, and where people stopped (first DM not tapped,
   follow request not followed, failures), call `get_automation_activity`.
 - The page must be published first. When the user wants the DM to open a web address
-  they already have (their blog, a recipe, a shop) rather than a SayPage page, pass `url`
+  they already have (their blog, a recipe, a shop) rather than a Saypage page, pass `url`
   (and a short `url_name`) instead of `page_id`.
 - The free plan runs one automation, on a post the user
   picks (arming for the next post is paid); say so plainly if `create_automation` answers
   with a plan limit. The answer links the page describing the plans: share it whenever it
   helps the user, as information, never as a push to upgrade.
-- **Monthly contacts**: each plan caps how many different people the automations DM per
-  calendar month (UTC): `plan.limits.monthly_active_contact_limit` in `get_account`, with
-  `plan.contacts_this_month` so far. Someone already DMed this month never counts twice.
+- **Monthly DMs**: each plan caps how many comments the automations answer by DM per
+  calendar month (UTC): `plan.limits.monthly_dm_limit` in `get_account`, with
+  `plan.dms_this_month` so far. A comment counts once, however many messages its DMs take.
   Once the cap is reached, new commenters get nothing until the month ends, and their
   comments are not answered later (`get_automation_activity`: `not_sent`, cause
   `plan_limit`). When DMs seem to be missing, check this first and tell the user plainly.
@@ -176,9 +182,10 @@ you to act for them.
   and `fit` shows you each image exactly as Instagram gets it: check that no headline or
   face is cut off, show the user, and try another `fit` if needed. Instagram also
   crops a carousel to its first image's shape: tell the user. A caption holds 2,200
-  characters, 30 hashtags and 20 @mentions; add `alt_texts` for accessibility. Then show
+  characters and 20 @mentions, and Instagram now allows five hashtags a post; add
+  `alt_texts` for accessibility. Then show
   the user the final caption, **ask**, and `publish_instagram_post(container_id)` within 24
-  hours. SayPage cannot delete a published post (the user can, in the Instagram app).
+  hours. Saypage cannot delete a published post (the user can, in the Instagram app).
   Instagram limits how many posts an account publishes a day (`publishing_quota`). If
   publishing fails, check `list_instagram_posts` before trying again: never post twice.
 - **Publishing a Reel or a video story**: the user uploads the video (MP4 or MOV, at most
@@ -187,10 +194,10 @@ you to act for them.
   its `id`. Agree on the caption, **ask**, then `publish_instagram_video(video_id, kind,
   caption)` with `kind: "reel"` (Reels tab, and the feed unless `share_to_feed: false`;
   `cover_frame_ms` picks the cover frame) or `"story"` (no caption, 60 seconds and 100 MB at
-  most). It then goes out by itself: SayPage hands it to Instagram, publishes it as soon as
+  most). It then goes out by itself: Saypage hands it to Instagram, publishes it as soon as
   Instagram has processed it (usually a few minutes) and deletes its copy. It cannot be
   stopped. A minute or two later, `list_videos` says `published` (with its `permalink`) or
-  `failed` (with the reason). Videos never go on pages, and SayPage deletes one that is not
+  `failed` (with the reason). Videos never go on pages, and Saypage deletes one that is not
   published within an hour of its upload: publish it in the same conversation.
 - **Insights**: `get_instagram_insights(days)` (up to 30 days: `reach`, `views`,
   `accounts_engaged`, `interactions`, `likes`, `comments`, `shares`, `saves`, `replies` (to
@@ -201,7 +208,7 @@ you to act for them.
   Instagram held back and why (follows, unfollows and demographics need 100 followers;
   story insights last 24 hours; data can lag 48 hours): give the user that reason rather
   than guessing. Instagram does not count taps on the bio's links: `get_page_stats` shows
-  the visits SayPage pages get from the bio. Compare posts to explain what worked, then
+  the visits Saypage pages get from the bio. Compare posts to explain what worked, then
   suggest what to post next.
 - **Page stats**: `get_page_stats(days)` gives each page's views, daily views, where
   visitors came from (`channels`: `instagram_dm` for the automations' DMs, `instagram_bio`
@@ -209,10 +216,10 @@ you to act for them.
   a `?source=` tag), top referring sites and countries. To tell other channels apart, add `?source=tiktok` (or `facebook`, `youtube`,
   `linkedin`, `pinterest`, `x`, `threads`, `email`, `newsletter`, `website`, `qr`) to the
   links the user shares there. The bio link needs no tag, and never use `?source=instagram`:
-  SayPage reserves it for DM links. Clicks on links inside a page are not counted.
+  Saypage reserves it for DM links. Clicks on links inside a page are not counted.
 - `get_account` says per account whether it `can_publish_posts` (false unless the user
   turned publishing on) and `can_read_insights` (false only for an account connected before
-  SayPage asked for it: `connect_instagram` again).
+  Saypage asked for it: `connect_instagram` again).
 
 ## When something is refused
 
@@ -221,12 +228,13 @@ Every error says what is wrong: fix exactly that and try again. A page's problem
 
 | Message | Fix |
 |---|---|
-| Publishing is closed on this account | SayPage refused or took down several of the user's pages. Tell them; they can contest by replying to SayPage's email. Do not work around it |
+| Publishing is closed on this account | Saypage refused or took down several of the user's pages. Tell them; they can contest by replying to Saypage's email. Do not work around it |
 | Connect your Instagram professional account first | `connect_instagram` |
 | your plan publishes 1 page at a time | Tell the user which page is online. Only if they choose to take it offline for this one, `unpublish_page` that page, then publish again; never pick a page yourself. The plans page it links is information to share when it helps, not an upgrade pitch |
+| your plan allows 10 page updates a month | Tell the user the draft is kept and when they can publish again (the message says). Keep editing and previewing if they want; never retry. Share the plans page as information when it helps, not an upgrade pitch |
 | Publishing posts is optional and turned off | Tell the user; `get_instagram_publishing_link` only if they want it |
-| SayPage is not allowed to read insights | `connect_instagram` again and allow it |
+| Saypage is not allowed to read insights | `connect_instagram` again and allow it |
 | Instagram has no comment … that @… can reach | The id is wrong, or the comment was deleted or is under another account's post: take ids from `list_instagram_comments` |
 | this image is used by … | Remove it from those pages, save or publish them, then `delete_image` |
 | this account already holds as many images as it can | `delete_image` images no page uses (ask first), then upload again |
-| an automation sends this page or has a button opening it | Delete that automation or remove its button (`update_automation`) before unpublishing or deleting the page |
+| an automation sends this page or has a button opening it | Point that automation at another link or remove its button (`update_automation`), or delete it, before unpublishing or deleting the page |

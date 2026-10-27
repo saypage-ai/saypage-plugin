@@ -1,0 +1,25 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.saypage/saypage",
+  "title": "Saypage",
+  "description": "Build and host link-in-bio pages and run Instagram comment-to-DM automations from the conversation.",
+  "version": "1.0.8",
+  "websiteUrl": "https://saypage.ai",
+  "repository": {
+    "url": "https://github.com/saypage-ai/saypage-plugin",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://saypage.ai/icon.png",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.saypage.ai/mcp"
+    }
+  ]
+}
