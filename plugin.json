@@ -18,7 +18,9 @@
     "comment-to-dm",
     "creators",
     "reels",
-    "captions"
+    "captions",
+    "linktree",
+    "manychat"
   ],
   "extensions": {
     "com.openai": {
@@ -105,7 +107,7 @@
       },
       "publication": {
         "countries": [],
-        "release_notes": "Initial release of Saypage for ChatGPT and Codex. Create, privately preview and publish hosted web pages; set up Instagram keyword comment-to-DM automations; read, reply to, hide and delete Instagram comments; view Instagram insights and page visit statistics. Optional Instagram publishing supports photos, carousels, Reels and stories after the user enables it. Pages are checked before publication, and public actions require the user's approval."
+        "release_notes": "Adds 13 skills for Instagram content: Reel scripts, captions, carousels, story sequences, weekly content calendars, comment replies, engagement comments, DM wording, profile reviews, performance reviews, niche research, repurposing content and writing in the user's own voice. The main skill now matches the service: monthly DM and page update limits read from the account, automations that can move to another post or link, and Instagram's five-hashtag limit. Adds discovery keywords."
       }
     }
   }

@@ -52,8 +52,13 @@ version stays online) or `checking` (read `get_page` a minute later). The live p
 changes on `publish_page`. With a shell, keep the page in a file and upload it:
 `create_page` / `update_page` without `html` return the `curl` command to run. Each page or
 new version that goes live counts toward the plan's page updates a month
-(`plan.limits.monthly_publish_limit`, 10 on the free plan; refusals don't count): make every
-change the user asks for in the draft, then publish once.
+(`plan.limits.monthly_publish_limit`; refusals don't count): make every change the user asks
+for in the draft, then publish once.
+
+Without a plan (`plan.tier` is `none` in `get_account`), the user can connect Instagram, read
+their posts, comments and insights, and draft and preview pages. Putting a page online,
+activating an automation, replying to, hiding or deleting comments and posting need a plan.
+Show them the preview anyway: it is how they see what they would get.
 
 To send a page on Instagram: `list_instagram_posts`, pick the post with the user, choose a
 keyword, agree on the DM wording with them (see "Automations"), then **ask the user before**
@@ -108,8 +113,16 @@ create a second one for the same post and keyword.
 - `follow_gate: true` only sends the link to followers of the account: others get
   `follow_request_message` with a button (`follow_request_button_label`) to tap once they
   follow. `public_reply` optionally answers the comment publicly ("Sent you a DM!").
+- `email_gate: true` builds the user's email list: after the tap (and the follow gate),
+  the follower gets `email_request_message` and types their address in reply; the link
+  goes out once a reply holds one (the request goes out 3 times at most, then the
+  sequence stops). Followers who already gave this account an address get the link at
+  once. Offer it when the user wants emails for an ebook, a newsletter or a waitlist: no
+  website or domain needed. The request must say what the address is for.
+  `list_emails` returns the addresses and a CSV download link (15 minutes) to import into
+  their email tool; `delete_email` removes one when its owner asks.
 - Write **every** message and button label in the user's language, including the
-  follow-gate ones when `follow_gate` is on: the defaults are English, and a DM that
+  follow-gate ones when `follow_gate` is on and the email request with `email_gate`: the defaults are English, and a DM that
   switches language halfway looks broken. Button labels are 20 characters at most.
 - **Keyword matching**: a comment triggers the automation when it contains the keyword as
   whole words, in any case ("Recipes please 🙌" triggers `RECIPES`, "myrecipes" does
@@ -136,9 +149,9 @@ create a second one for the same post and keyword.
 - The page must be published first. When the user wants the DM to open a web address
   they already have (their blog, a recipe, a shop) rather than a Saypage page, pass `url`
   (and a short `url_name`) instead of `page_id`.
-- The free plan runs one automation, on a post the user
-  picks (arming for the next post is paid); say so plainly if `create_automation` answers
-  with a plan limit. The answer links the page describing the plans: share it whenever it
+- The free plan (kept by older accounts) runs one automation, on a post the user picks
+  (arming for the next post is paid); say so plainly if `create_automation` answers with a
+  plan limit. The answer links the page describing the plans: share it whenever it
   helps the user, as information, never as a push to upgrade.
 - **Monthly DMs**: each plan caps how many comments the automations answer by DM per
   calendar month (UTC): `plan.limits.monthly_dm_limit` in `get_account`, with
@@ -230,6 +243,7 @@ Every error says what is wrong: fix exactly that and try again. A page's problem
 |---|---|
 | Publishing is closed on this account | Saypage refused or took down several of the user's pages. Tell them; they can contest by replying to Saypage's email. Do not work around it |
 | Connect your Instagram professional account first | `connect_instagram` |
+| this account has no Saypage plan | Tell the user plainly what needs a plan; their drafts and previews are kept. Share the plans page as information when it helps, not an upgrade pitch |
 | your plan publishes 1 page at a time | Tell the user which page is online. Only if they choose to take it offline for this one, `unpublish_page` that page, then publish again; never pick a page yourself. The plans page it links is information to share when it helps, not an upgrade pitch |
 | your plan allows 10 page updates a month | Tell the user the draft is kept and when they can publish again (the message says). Keep editing and previewing if they want; never retry. Share the plans page as information when it helps, not an upgrade pitch |
 | Publishing posts is optional and turned off | Tell the user; `get_instagram_publishing_link` only if they want it |

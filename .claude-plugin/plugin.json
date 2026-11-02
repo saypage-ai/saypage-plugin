@@ -18,7 +18,9 @@
     "comment-to-dm",
     "creators",
     "reels",
-    "captions"
+    "captions",
+    "linktree",
+    "manychat"
   ],
   "icon": "./assets/icon.png",
   "documentationUrl": "https://saypage.ai/docs",

@@ -43,7 +43,7 @@ Before any image exists, show the copy as a numbered list and let the user chang
 
 ## 3. Make the images
 
-- **With a shell** (Claude Code, Codex): one HTML section per slide at 1080×1350 px,
+- **With a shell** (assistants that can run commands): one HTML section per slide at 1080×1350 px,
   rendered to PNG or JPEG with headless Chrome or whatever is installed, then each file
   uploaded with `start_image_upload` and `confirm_image_upload`.
 - **In chat apps**: the user designs the slides in their usual tool (or picks photos) and

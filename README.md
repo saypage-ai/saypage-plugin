@@ -47,7 +47,8 @@ The plugin runs no code on your computer and stores nothing itself.
 ## Use it
 
 1. Add the plugin, then connect the Saypage connector and sign in to saypage.ai (or create
-   a free account).
+   an account). Drafts and previews work right away; putting pages online and running
+   automations start with a 7-day free trial.
 2. Ask your assistant to connect your Instagram professional account: your site's address
    comes from your handle, and every page is tied to it.
 3. Then just ask, for example:
