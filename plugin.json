@@ -107,7 +107,7 @@
       },
       "publication": {
         "countries": [],
-        "release_notes": "Adds 13 skills for Instagram content: Reel scripts, captions, carousels, story sequences, weekly content calendars, comment replies, engagement comments, DM wording, profile reviews, performance reviews, niche research, repurposing content and writing in the user's own voice. The main skill now matches the service: monthly DM and page update limits read from the account, automations that can move to another post or link, and Instagram's five-hashtag limit. Adds discovery keywords."
+        "release_notes": "Adds 13 skills for Instagram content: Reel scripts, captions, carousels, story sequences, weekly content calendars, comment replies, engagement comments, DM wording, profile reviews, performance reviews, niche research, repurposing content and writing in the user's own voice. The main skill now matches the service: monthly DM and page update limits read from the account, automations that can move to another post or link, and Instagram's five-hashtag limit. The Reel, caption, comment and review skills pair each Reel with a page made for it and the comment-to-DM automation that sends it. Adds discovery keywords."
       }
     }
   }

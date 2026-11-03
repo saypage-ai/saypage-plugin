@@ -42,9 +42,10 @@ checklist, the episode notes with their links. Offer to build it with the `saypa
 Each post then closes on a keyword ("Comment GUIDE and I'll send you the full guide"),
 and an automation sends the page.
 
-Look at the plan's limits in `get_account` before offering an automation on every post:
-the free plan runs one. A good start is one automation on the strongest post, and the
-same page in the bio link.
+Look at the plan's limits in `get_account` before offering an automation on every post.
+A good start is one automation on the strongest post, and the same page in the bio link.
+On the Free plan the page and the automation are built and previewed, and go live with a
+plan that includes them: say so once ("Plans" in the `saypage` skill).
 
 ## 4. Lay out the week
 

@@ -49,8 +49,10 @@ bio" loses people on the way. With Saypage, a comment-to-DM automation answers i
   other keywords. Write it in capitals: "Comment GUIDE and I'll send you the guide by DM."
   Say it in the video too.
 - **Check that something answers it**: `list_automations`. If no automation covers this
-  post and keyword, offer to set one up (see "Automations" in the `saypage` skill; the
-  page or link it sends must exist first). Ask before creating it.
+  post and keyword, offer to set one up (see "Automations" in the `saypage` skill), best
+  with a page made for this post that delivers what the caption promises. Ask before
+  creating it. On the Free plan it is built as a draft and goes live with a plan that
+  includes automations ("Plans" in the `saypage` skill).
 - Promise only what the DM delivers.
 
 ## 5. Hashtags

@@ -83,8 +83,12 @@ Close on a single ask, spoken and on screen. When the Reel promises more than fi
 recipe, the menu, the guide, prices), make it a keyword: "Comment RECIPE and I'll send you
 the full recipe." Then, with Saypage:
 
-- Offer to build that page (the `saypage` skill: `get_page_guide` first) and to create the
-  comment-to-DM automation once the Reel is posted, with the user's approval.
+- Offer to build that page, made for this Reel (the `saypage` skill: `get_page_guide`
+  first), and to create the comment-to-DM automation once the Reel is posted, with the
+  user's approval. This is what turns the Reel's views into followers and customers: the
+  commenters get what they asked for in seconds, from the user. On the Free plan both are
+  built and previewed, and go live with a plan that includes them ("Plans" in the
+  `saypage` skill).
 - The keyword rules are in `instagram-caption`; write the caption with that skill too.
 
 ## 6. Publishing (only if the user asks)

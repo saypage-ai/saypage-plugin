@@ -55,16 +55,37 @@ new version that goes live counts toward the plan's page updates a month
 (`plan.limits.monthly_publish_limit`; refusals don't count): make every change the user asks
 for in the draft, then publish once.
 
-Without a plan (`plan.tier` is `none` in `get_account`), the user can connect Instagram, read
-their posts, comments and insights, and draft and preview pages. Putting a page online,
-activating an automation, replying to, hiding or deleting comments and posting need a plan.
-Show them the preview anyway: it is how they see what they would get.
+**Plans.** `get_account` names the user's plan (`plan.name`). On **Free** (`plan.tier`
+`none`), Saypage connects their Instagram to you: posts, comments (reading, replying,
+hiding, deleting), insights and publishing all work, pages can be drafted and previewed,
+and one page goes online, the home page (path /, the address for their Instagram bio).
+Every other page and every automation come with Creator or Premium. When a Free user
+wants another page or an automation, build it all the same (the page with its preview,
+the automation as a draft) so they see what they would get, then say plainly, once, what
+needs another plan. The refusal links the page describing the plans:
+share it as information, never as a push to upgrade.
 
 To send a page on Instagram: `list_instagram_posts`, pick the post with the user, choose a
 keyword, agree on the DM wording with them (see "Automations"), then **ask the user before**
 `create_automation`. If it answers `activated: false`, the automation is kept as a draft:
 fix the `reason` (for example the plan), then call `activate_automation` with its id. Never
 create a second one for the same post and keyword.
+
+## One Reel, one page
+
+A Reel's views turn into followers, subscribers or customers when viewers get a clear next
+step: the Reel closes on a keyword ask ("Comment RECIPE and I'll send it to you"), and an
+automation DMs every commenter, within seconds, a page made for that Reel (what it
+promised, in full, then the one thing the user wants them to do next; `get_page_guide` has
+a section on these pages). Links in captions are not clickable and "link in bio" loses
+people on the way, so this is the user's best tool to grow from what they already post.
+
+Offer it where it fits what the user is doing, not out of the blue: when they plan, script,
+caption or publish a Reel or a carousel that promises more than fits in it, when a caption
+asks for a keyword that no automation answers, when comments keep asking for the same thing
+(the recipe, the price, the link), and when a review shows Reels that reached people but
+left them nowhere to go. Results with a `suggestion` say when. Offer it once per
+conversation and drop it if they decline.
 
 ## Images
 
@@ -149,10 +170,12 @@ create a second one for the same post and keyword.
 - The page must be published first. When the user wants the DM to open a web address
   they already have (their blog, a recipe, a shop) rather than a Saypage page, pass `url`
   (and a short `url_name`) instead of `page_id`.
-- The free plan (kept by older accounts) runs one automation, on a post the user picks
-  (arming for the next post is paid); say so plainly if `create_automation` answers with a
-  plan limit. The answer links the page describing the plans: share it whenever it
-  helps the user, as information, never as a push to upgrade.
+- The Free plan runs no automation: `create_automation` keeps it as a draft
+  (`activated: false`), ready to turn on once the plan includes automations. The earlier
+  free plan (kept by older accounts) runs one, on a post the user picks (arming for the
+  next post is paid). Say so plainly when `create_automation` answers with a plan limit.
+  The answer links the page describing the plans: share it whenever it helps the user, as
+  information, never as a push to upgrade.
 - **Monthly DMs**: each plan caps how many comments the automations answer by DM per
   calendar month (UTC): `plan.limits.monthly_dm_limit` in `get_account`, with
   `plan.dms_this_month` so far. A comment counts once, however many messages its DMs take.
@@ -243,7 +266,8 @@ Every error says what is wrong: fix exactly that and try again. A page's problem
 |---|---|
 | Publishing is closed on this account | Saypage refused or took down several of the user's pages. Tell them; they can contest by replying to Saypage's email. Do not work around it |
 | Connect your Instagram professional account first | `connect_instagram` |
-| this account has no Saypage plan | Tell the user plainly what needs a plan; their drafts and previews are kept. Share the plans page as information when it helps, not an upgrade pitch |
+| the Free plan puts one page online, the home page | Tell the user plainly; the draft and its preview are kept, and their home page (path /) can go online. Share the plans page as information when it helps, not an upgrade pitch |
+| the Free plan runs no automation | Tell the user plainly; the automation is kept as a draft. Share the plans page as information when it helps, not an upgrade pitch |
 | your plan publishes 1 page at a time | Tell the user which page is online. Only if they choose to take it offline for this one, `unpublish_page` that page, then publish again; never pick a page yourself. The plans page it links is information to share when it helps, not an upgrade pitch |
 | your plan allows 10 page updates a month | Tell the user the draft is kept and when they can publish again (the message says). Keep editing and previewing if they want; never retry. Share the plans page as information when it helps, not an upgrade pitch |
 | Publishing posts is optional and turned off | Tell the user; `get_instagram_publishing_link` only if they want it |

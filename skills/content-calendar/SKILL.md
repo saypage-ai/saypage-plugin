@@ -50,7 +50,9 @@ the shop closes late" rather than "pasta".
 - **The ask**: when a post promises something to send, give it a keyword and say which page
   it sends (an existing one from `list_pages`, or one to build with the `saypage` skill).
 - **The automation**: note which ones to create and on which post. Check the plan's limits
-  in `get_account` before promising one on every post; the free plan runs one automation.
+  in `get_account` before promising one on every post. On the Free plan none runs yet:
+  plan the asks and build the pages all the same, and say once that they go live with a
+  plan that includes them ("Plans" in the `saypage` skill).
 - **The bio**: if the plan pushes people to the bio link, make sure it leads to a page
   that matches the offer (`profile-review`).
 

@@ -79,6 +79,12 @@ present patterns as hunches to test, not conclusions.
   conversion data, use it before diagnosing the page (the `saypage` skill).
 - **DMs missing**: check `plan.dms_this_month` against `plan.limits.monthly_dm_limit` in
   `get_account` first.
+- **Reach with nowhere to go**: a Reel that broke out without a keyword ask, or whose
+  keyword no automation answers (`comment_keyword` in `list_instagram_posts`, nothing in
+  `list_automations`), left its viewers only the bio link. Say what it could have brought,
+  without inventing a number, and suggest the fix for the next one: the keyword ask, a page
+  made for that Reel and the automation that sends it ("One Reel, one page" in the
+  `saypage` skill).
 
 ## Output
 
@@ -104,6 +110,7 @@ WHAT THE NUMBERS SAY
 KEEP   mistake-and-fix Reels, recipe carousels
 STOP   menu announcements as Reels
 TRY    a carousel version of the top Reel, with a keyword for the full recipe
+       the next mistake-and-fix Reel closes on "Comment SALT": its page sent by DM
 ```
 
 Then offer to build next week on it (`content-calendar`).

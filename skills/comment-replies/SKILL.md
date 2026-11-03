@@ -45,7 +45,11 @@ create one (see the `saypage` skill); people who commented before it existed wil
 the DM automatically. Do not post the same manual reply under each one.
 
 **Questions many people ask** are the next post: flag them for `reel-script` (Instagram can
-answer a comment with a Reel) or `carousel-post`.
+answer a comment with a Reel) or `carousel-post`. When they ask for something to send (the
+recipe, the price list, the link), suggest a page that answers it and a keyword in the
+caption, with an automation that DMs the page to everyone who comments it: the next
+hundred get it within seconds, without a reply each ("One Reel, one page" in the `saypage`
+skill).
 
 ## 3. Write the replies
 
