@@ -1,0 +1,16 @@
+{
+  "name": "saypage-ai",
+  "description": "The Saypage plugin: web pages, Instagram comment-to-DM automations and skills that turn a Reel's views into customers.",
+  "owner": {
+    "name": "Twist Labs",
+    "email": "hello@saypage.ai",
+    "url": "https://saypage.ai"
+  },
+  "plugins": [
+    {
+      "name": "saypage",
+      "source": "./",
+      "description": "Build and host pages, send them by Instagram DM to people who comment a keyword, and turn a Reel's views into customers."
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "saypage",
-  "version": "1.0.8",
-  "description": "Build and host web pages (link in bio, menus, guides, recipe pages) on your own saypage.page address, send them by Instagram DM to followers who comment a keyword, manage your Instagram comments, posts and insights from the conversation, and write Reels, captions, carousels, stories and weekly content calendars.",
+  "version": "1.0.9",
+  "description": "Build and host web pages (link in bio, menus, guides, recipe pages) on your own saypage.page address, send them by Instagram DM to followers who comment a keyword, manage your Instagram comments, posts and insights from the conversation, write Reels, captions, carousels and weekly content calendars, and turn a Reel's views into customers with a page, a keyword DM and a review of each step.",
   "author": {
     "name": "Twist Labs",
     "email": "hello@saypage.ai",
@@ -107,7 +107,7 @@
       },
       "publication": {
         "countries": [],
-        "release_notes": "Adds 13 skills for Instagram content: Reel scripts, captions, carousels, story sequences, weekly content calendars, comment replies, engagement comments, DM wording, profile reviews, performance reviews, niche research, repurposing content and writing in the user's own voice. The main skill now matches the service: monthly DM and page update limits read from the account, automations that can move to another post or link, and Instagram's five-hashtag limit. The Reel, caption, comment and review skills pair each Reel with a page made for it and the comment-to-DM automation that sends it. Adds discovery keywords."
+        "release_notes": "Adds 16 skills for Instagram: Reel scripts, captions, carousels, weekly content calendars with stories, comment replies, DM wording, profile reviews, performance reviews, repurposing content and writing in the user's own voice, plus skills that help sell from Reels: an account sales plan, an opportunity scan, a Reel analysis, a Reel funnel that builds and tests the path from a keyword to a sale, an offer finder and a funnel review. The main skill now matches the service: monthly DM and page update limits read from the account, automations that can move to another post or link, and Instagram's five-hashtag limit. The Reel, caption, comment and review skills pair each Reel with a page made for it and the comment-to-DM automation that sends it. Adds discovery keywords."
       }
     }
   }

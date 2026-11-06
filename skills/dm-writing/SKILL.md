@@ -1,7 +1,7 @@
 ---
 name: dm-writing
 description: >-
-  Write Instagram DMs: the messages and button labels of a Saypage comment-to-DM automation (opening message, link message, follow request, public reply), and the messages the user sends by hand (answering someone who wrote first, a collab or brand pitch, one follow-up). Saypage sends DMs only to people who comment a keyword and cannot read the inbox. Use for requests like "write the messages my automation sends", "help me pitch a brand", "how do I answer this person", "should I follow up?".
+  Write the messages and button labels of a Saypage comment-to-DM automation (opening message, link message, follow request, email request, public reply), and help answer someone who wrote first. Saypage sends DMs only to people who comment a keyword and cannot read the inbox. Use for requests like "write the messages my automation sends", "what should the DM say", "ask for their email in the DM", "how do I answer this person".
 ---
 
 # DM writing
@@ -36,39 +36,36 @@ Instagram requires two steps: an opening message with a button, then the link.
   plainly that the link is for followers, without guilt. "This one's for my followers:
   follow @maisonlune.lyon, then tap below and it's yours." / "I'm following". A follow gate
   wins follows and loses some of the people who wanted the link: say so to the user.
+- With `email_gate: true`, `email_request_message`: say what they get and what the address is
+  for. "Where should I send the guide? Reply with your email and you'll get it, plus my recipe
+  of the week." It comes after the tap and any follow gate, and they type the address in
+  reply. The link goes out once a reply holds one; the request goes out 3 times at most, then
+  the sequence stops. Followers who already gave this account an address get the link at once.
+  An email gate builds the list and loses some of the people who wanted the link: say so to
+  the user.
 - `public_reply` (optional): the short public answer under the comment ("Sent you a DM!").
 
 Rules for all of them:
 
 - **Button labels: 20 characters at most.** Count them.
-- **Every message in the user's language**, including the follow-gate ones when the gate is
-  on: the defaults are English, and a DM that switches language looks broken.
-- **The link comes with the second message, no strings attached.** Asking for something in
-  return first (their email, their story) makes a free offer feel like a trap.
+- **Every message in the user's language**, including the follow-gate and email ones when
+  those gates are on: the defaults are English, and a DM that switches language looks broken.
+- **No surprise conditions.** The link comes with the second message unless the user chose a
+  follow or email gate. With a gate, say so in the ask ("Comment GUIDE and leave your email")
+  and say what they get for it: a condition that only shows up in the DMs makes a free offer
+  feel like a trap. Ask for nothing else in return, such as a story or a share.
 - **Let the user choose the words.** These DMs speak in their name: offer two tones (warm,
   short) or let them write their own, and show the final texts before `create_automation`
   or `update_automation`, as the `saypage` skill describes.
 
-To see where people stop (opening DM not tapped, follow request ignored),
-`get_automation_activity` on the automation; rewrite the step that loses them.
+To see where people stop and rewrite the step that loses them, use `funnel-review`.
 
 ## 2. Messages the user sends by hand
 
-For these, Saypage only helps write; the user sends them from the app.
-
-- **Answering someone who wrote first** (a story reply, a question): answer what they
-  asked, in two to four sentences, then one small question or next step.
-- **A collab or brand pitch**: open with the collaboration itself (a joint Reel, a giveaway,
-  a dish made with their product), say why it suits both audiences, with a number when
-  the user has one (followers in their city, a past result), and close with a simple
-  question they can answer yes or no. Keep a media kit or a link for when they reply.
-- **A follow-up**: once, a week or so later, and only to bring something they did not have
-  (a date, a sample, a result). Then let it go.
-- **Cold messages to strangers** rarely get answers, and many sent in a row get accounts
-  restricted. Suggest commenting on their posts for a couple of weeks first
-  (`engagement-comments`). Never automate outreach.
-
-Everything in a pitch must be true: no made-up mutual friends, earlier chats or results.
+Saypage only helps write these; the user sends them from the app. When someone wrote first
+(a story reply, a question), answer what they asked in two to four sentences, then one small
+question or next step. Keep every fact true, and never automate outreach: many cold messages
+in a row get accounts restricted.
 
 ## Output
 

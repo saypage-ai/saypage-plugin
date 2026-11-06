@@ -1,7 +1,7 @@
 ---
 name: content-calendar
 description: >-
-  Plan the user's Instagram week: how many posts they can really make, the format and subject of each, the call to action and the Saypage page or automation behind it, daily stories and time for comments. Built from their recent posts and insights when Saypage is connected. Use for requests like "what do I post this week", "make me a posting schedule", "I'm out of ideas", "organise my Instagram for November".
+  Plan the user's Instagram week: how many posts they can really make, the format and subject of each, the call to action and the Saypage page or automation behind it, daily stories and time for comments. Built from their recent posts and insights when Saypage is connected. Use for requests like "what do I post this week", "make me a posting schedule", "I'm out of ideas", "organise my Instagram for November", "ideas for today's stories".
 ---
 
 # Content calendar
@@ -19,8 +19,8 @@ With Saypage connected (call `get_account` first):
   followers or more: the countries tell you which time zone to plan in.
 - `list_automations` and `get_page_stats`: which keywords already run, and which pages
   people visit.
-- If `performance-review` ran in this conversation, its findings outrank every default
-  below.
+- If `sales-plan` or `performance-review` ran in this conversation, their findings outrank
+  every default below.
 
 Then ask, in one message:
 
@@ -48,7 +48,8 @@ the shop closes late" rather than "pasta".
 ## 3. Wire each post to Saypage
 
 - **The ask**: when a post promises something to send, give it a keyword and say which page
-  it sends (an existing one from `list_pages`, or one to build with the `saypage` skill).
+  it sends (an existing one from `list_pages`, or one to build with `reel-funnel`). An Offer
+  post needs something to sell: if the user has nothing yet, start with `offer-finder`.
 - **The automation**: note which ones to create and on which post. Check the plan's limits
   in `get_account` before promising one on every post. On the Free plan none runs yet:
   plan the asks and build the pages all the same, and say once that they go live with a
@@ -69,10 +70,26 @@ Saypage has no scheduler: it publishes when the user asks. The plan says when to
 
 ## 5. Around the posts
 
-- **Stories**: daily, three to six frames (`story-sequence`).
-- **Comments**: 15 minutes after each post to answer the first comments
-  (`comment-replies`), and 10 to 15 minutes a day commenting on other accounts
-  (`engagement-comments`).
+**Comments**: 15 minutes after each post to answer the first comments (`comment-replies`).
+
+**Stories**: three to six frames a day. They rarely reach new people: they reach followers,
+for a day, so use them to give those followers an easy reason to reply, visit or buy.
+
+- **A day's shape**: what is happening now, filmed; a detail, a price or how it is made; one
+  sticker around the middle, while most people still watch; the answer, or a reason to come
+  back tomorrow.
+- **One sticker per job**: a poll for easy taps, a question box to hear what people want
+  (keep the answers: they are tomorrow's hooks), a link to a Saypage page, a countdown for a
+  launch.
+- **Open on something real** (a face, hands, a place), with few words, away from the top and
+  bottom 250 px of the 1080×1920 frame.
+- **Selling works here**: the context, then the offer, then someone who liked it.
+- **What Saypage cannot do**: Instagram's API publishes stories without stickers, so frames
+  with a poll or a link go out from the app. Plain frames can go through Saypage when the
+  user asks (`prepare_instagram_post` with `kind: "story"`, or `publish_instagram_video`).
+  Replies land in the inbox, which Saypage cannot read, and trigger no automation: to send
+  something automatically, point the story to a post with a keyword, or add a link sticker.
+  Visits from link stickers appear in `get_page_stats` under `instagram_bio`.
 
 ## Output
 
@@ -84,7 +101,7 @@ THU 12:00  CAROUSEL  Useful    5 weeknight sauces, 10 minutes each           ask
 SAT 10:00  REEL      Offer     Sunday cooking class, 6 seats left            ask: Comment CLASS -> booking page (live)
 
 STORIES   every day; poll on Wednesday, class countdown from Thursday
-COMMENTS  15 min after each post; 10 min a day on other accounts
+COMMENTS  15 min after each post
 
 To do with Saypage: build the sauces page, then an automation on Thursday's post.
 ```

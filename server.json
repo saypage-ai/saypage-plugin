@@ -3,7 +3,7 @@
   "name": "ai.saypage/saypage",
   "title": "Saypage",
   "description": "Build and host link-in-bio pages and run Instagram comment-to-DM automations from the conversation.",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "websiteUrl": "https://saypage.ai",
   "repository": {
     "url": "https://github.com/saypage-ai/saypage-plugin",

@@ -87,6 +87,11 @@ asks for a keyword that no automation answers, when comments keep asking for the
 left them nowhere to go. Results with a `suggestion` say when. Offer it once per
 conversation and drop it if they decline.
 
+When the plugin's skills are available: `sales-plan` analyzes the whole account and plans what
+to do first, `opportunity-scan` finds the quickest wins, `reel-funnel` builds and tests the
+path for one Reel, `reel-analysis` explains how one Reel did, `offer-finder` finds what to sell
+when the user has nothing yet, and `funnel-review` reads the results and improves them.
+
 ## Images
 
 - **Assistants that can run shell commands**: `start_image_upload(filename, content_type,
@@ -252,7 +257,10 @@ you to act for them.
   a `?source=` tag), top referring sites and countries. To tell other channels apart, add `?source=tiktok` (or `facebook`, `youtube`,
   `linkedin`, `pinterest`, `x`, `threads`, `email`, `newsletter`, `website`, `qr`) to the
   links the user shares there. The bio link needs no tag, and never use `?source=instagram`:
-  Saypage reserves it for DM links. Clicks on links inside a page are not counted.
+  Saypage reserves it for DM links. `clicks` counts taps on the page's links, with
+  `click_channels` (the same channels, or `other`) and `destinations` (without query
+  strings): taps, not people or sales, and a few are missed. Saypage sees the click, never
+  what happens after it.
 - `get_account` says per account whether it `can_publish_posts` (false unless the user
   turned publishing on) and `can_read_insights` (false only for an account connected before
   Saypage asked for it: `connect_instagram` again).

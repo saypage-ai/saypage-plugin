@@ -89,6 +89,7 @@ the full recipe." Then, with Saypage:
   commenters get what they asked for in seconds, from the user. On the Free plan both are
   built and previewed, and go live with a plan that includes them ("Plans" in the
   `saypage` skill).
+- When this Reel is meant to sell, `reel-funnel` builds the whole path and tests it.
 - The keyword rules are in `instagram-caption`; write the caption with that skill too.
 
 ## 6. Publishing (only if the user asks)

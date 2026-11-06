@@ -21,17 +21,20 @@ There is no dashboard: everything happens in the conversation.
 
   | Skill | What it does |
   |---|---|
+  | `sales-plan` | Your whole account analyzed: how many Reel views have a next step, what to fix first, and a short plan built on your own numbers |
+  | `opportunity-scan` | The sales you're leaving on the table right now, closest to buying first: unanswered keywords, buyers, Reels with nowhere to go |
+  | `reel-funnel` | One Reel's whole path to a sale, built and tested: the keyword, the DMs, a page made for it, the button to your checkout |
+  | `offer-finder` | What to sell, from what your followers already ask for: one offer, prices to try and a way to test the demand first |
+  | `funnel-review` | Where your funnels lose people, compared step by step, with one change at a time and a check that it worked |
+  | `reel-analysis` | One Reel read in depth, or two compared: why it worked or flopped, and what to keep, change or remake |
   | `reel-script` | One idea into a Reel: three hooks of different types, the script in your voice, on-screen text, a shot list |
   | `instagram-caption` | The caption: a first line that survives the "… more" cut, one ask, search words, up to five hashtags |
   | `carousel-post` | Slide-by-slide copy, 1080×1350 slides, each crop checked before posting |
-  | `story-sequence` | The day's stories, frame by frame, with the right sticker and a Saypage page behind the link |
-  | `content-calendar` | Your week: what to post, which format, which keyword and page behind each post |
-  | `performance-review` | What really worked, ranked against your own median, with shares, saves, follows and the keyword DM funnel |
-  | `niche-research` | Which Reels break out in your niche, and why, turned into ideas in your voice |
+  | `content-calendar` | Your week: what to post, which format, which keyword and page behind each post, and your stories |
+  | `performance-review` | What really worked, ranked against your own median, with shares, saves and follows |
   | `profile-review` | Your name field, bio, pinned posts and highlights, and a link page that keeps the bio's promise |
   | `comment-replies` | The comments under your posts: sorted, answered in each commenter's language, spam hidden |
-  | `engagement-comments` | Comments worth leaving on other accounts' posts (you post them) |
-  | `dm-writing` | Your automation's DM messages and button labels, and the DMs you send by hand |
+  | `dm-writing` | Your automation's DM messages and button labels, gates included |
   | `repurpose-content` | One video, podcast or article into a week of posts and one page they all send |
   | `natural-voice` | A last pass on every draft so it sounds like you, not like generated text |
 - **The Saypage connector** (`.mcp.json`): Saypage's remote MCP server at
@@ -43,6 +46,18 @@ There is no dashboard: everything happens in the conversation.
   [official MCP Registry](https://registry.modelcontextprotocol.io), `ai.saypage/saypage`.
 
 The plugin runs no code on your computer and stores nothing itself.
+
+## Install
+
+- **Claude, on the web and the desktop app** (paid plans): open Customize, then Plugins. Click
+  Add, then Add marketplace, enter `saypage-ai/saypage-plugin`, and add Saypage from the list.
+- **Claude Code**:
+
+  ```bash
+  claude plugin marketplace add saypage-ai/saypage-plugin
+  claude plugin install saypage@saypage-ai
+  ```
+- **ChatGPT**: open Plugins, search for Saypage and add it.
 
 ## Use it
 
@@ -57,6 +72,7 @@ The plugin runs no code on your computer and stores nothing itself.
    - "Reply to the unanswered comments on my last Reel."
    - "How did my posts do this month, and what should I post next?"
    - "Write a Reel about my 10-minute pasta, with a keyword that sends the recipe."
+   - "Analyze my account and make a plan to improve my sales from my Reels."
 
 The assistant shows you each page in a private preview and asks before it publishes a page,
 creates an automation, or posts or replies on Instagram. Publishing posts is optional and off
