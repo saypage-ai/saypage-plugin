@@ -33,7 +33,9 @@ One goal per Reel: a page that asks for two things usually gets neither.
 
 ## 2. One Reel
 
-With Saypage connected: `get_account`, then `list_instagram_posts` and `list_automations`.
+With Saypage connected: `get_account`, then `list_instagram_posts` and `list_automations`,
+every page of it (follow `next_cursor` until it is null) before saying no automation answers
+a Reel.
 
 **A Reel already posted** is the fastest start: nothing to film, and it may still reach
 people. Among the Reels of the last 60 days that no automation answers, compare

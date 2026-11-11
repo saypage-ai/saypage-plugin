@@ -15,10 +15,12 @@ If no automation has run yet, there is nothing to read: use `reel-funnel` instea
 
 ## 1. Collect the numbers
 
-With Saypage connected: `get_account`, then `list_automations`. There the messages read
-`opening_message_copy`, `opening_message_button_label`, `private_message_copy` (the link
-message) and `recipe_link_button_label`; the gates `follow_gate_enabled` and
-`email_gate_enabled`; the destination `page_id` or `custom_link`.
+With Saypage connected: `get_account`, then `list_automations`, following `next_cursor`
+until it is null, which gives each one's `gates` and destination (`page_id` or
+`custom_link`). Rank only once you have every page. For the funnels you review,
+`list_automations` with their `automation_id` gives the messages: `opening_message_copy`,
+`opening_message_button_label`, `private_message_copy` (the link message) and
+`recipe_link_button_label`.
 
 Then, for the funnels that ran, ten at most: the most `links_sent` first, then the newest
 Reels (`get_automation_activity` allows about six calls a minute: when it refuses, wait the

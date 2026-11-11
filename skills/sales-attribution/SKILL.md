@@ -34,7 +34,7 @@ reading results: a sale without a key stays "not attributed", never guessed.
 | Key | How | Works with |
 |---|---|---|
 | **Tagged link** | add `utm_source=instagram&utm_medium=dm&utm_campaign=<keyword>` to the checkout or booking link on the Reel's page (`update_page`, then `publish_page`) or in the automation's `url` (`update_automation`) | Shopify, Stripe Payment Links, Kajabi (on the checkout link itself), Gumroad, GA4 |
-| **Email** | the address the automation's email request collected (`list_emails`, `email_gate_enabled` on the automation) matches the buyer's email in the shop | any tool that records the customer's email |
+| **Email** | the address the automation's email request collected (`list_emails`, the `email` gate on the automation) matches the buyer's email in the shop | any tool that records the customer's email |
 | **Code per Reel** | a discount or referral code made in the shop for this Reel (`<KEYWORD>10`), named in the last DM (`update_automation`) and on the page | any tool with codes, sales by call or in person too |
 
 Write the tag on the link the user sees, in the page or the automation: never shorten or

@@ -25,8 +25,9 @@ this order:
    and `triggered_per_1000_views`: the analysis rests on them.
 2. **The account**: `get_instagram_insights` over 30 days, with `demographics: true` from 100
    followers.
-3. **Automations**: `list_automations` for their messages and gates; step 1 already gave each
-   one's `triggered`, `tapped` and `links_sent`. Then `get_automation_activity` on five at
+3. **Automations**: `list_automations` for their gates, then with an `automation_id` for the
+   messages of those you plan around; step 1 already gave each one's `triggered`, `tapped`
+   and `links_sent`. Then `get_automation_activity` on five at
    most, for where people stopped and the raised hands it `missed`: those with the most
    `triggered`, then those on the newest Reels. This tool allows about six calls a minute: when it refuses, wait the seconds it
    names.

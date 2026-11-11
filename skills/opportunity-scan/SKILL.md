@@ -18,9 +18,10 @@ Otherwise, tell the user this takes a minute or two, then read:
 - `get_account`, and `list_instagram_posts` over about 60 days, 30 Reels at most.
 - `insights: true` on that list: each post's `numbers` hold its views and its
   automations' funnel.
-- `list_automations`, then `get_automation_activity` on ten at most: those with the most
-  `links_sent`, then those on the newest Reels. It allows about six calls a minute: when it
-  refuses, wait the seconds it names.
+- `list_automations`, every page (follow `next_cursor` until it is null), then
+  `get_automation_activity` on ten at most: those with the most `links_sent`, then those on
+  the newest Reels. It allows about six calls a minute: when it refuses, wait the seconds it
+  names.
 - `list_pages`, and `get_page_stats` over 90 days.
 - `list_instagram_comments` on the five Reels with the most comments.
 - `list_emails`, for `total` only. Never repeat an address.
@@ -58,7 +59,7 @@ apart: new comments are what an automation can catch, since it never answers old
 | Look for | How to spot it | What to do |
 |---|---|---|
 | An automation switched off on a live Reel | `status` paused or draft, and its Reel still draws comments | `activate_automation`, with the user's go-ahead; comments made while paused are lost |
-| A gate on a sales path | `follow_gate_enabled` or `email_gate_enabled` on, and many people stopped there | weigh dropping it (`funnel-review`) |
+| A gate on a sales path | `follow` or `email` in its `gates`, and many people stopped there | weigh dropping it (`funnel-review`) |
 | A generic destination | the automation's `page_id` is the home page or a list of links (`list_pages` gives the path), not a page for that Reel | a page made for that Reel (`reel-funnel`) |
 | A page that hides the offer | among the three pages with the most visits, `get_page` shows no price, or no main button to the offer | add them, then `publish_page` with the user's go-ahead |
 | Emails nobody wrote to | `total` in `list_emails` is above 0, and the user has not used them | a message in their own email tool: `csv_url` gives the file, and Saypage sends no email |
