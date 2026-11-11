@@ -90,7 +90,9 @@ conversation and drop it if they decline.
 When the plugin's skills are available: `sales-plan` analyzes the whole account and plans what
 to do first, `opportunity-scan` finds the quickest wins, `reel-funnel` builds and tests the
 path for one Reel, `reel-analysis` explains how one Reel did, `offer-finder` finds what to sell
-when the user has nothing yet, and `funnel-review` reads the results and improves them.
+when the user has nothing yet, `media-kit` builds the page brands read before a paid
+partnership, `funnel-review` reads the results and improves them, and `sales-attribution`
+joins them with the user's own shop to say which Reels sold.
 
 ## Images
 
@@ -104,11 +106,12 @@ when the user has nothing yet, and `funnel-review` reads the results and improve
 - **Chat apps without a shell**: `request_upload_link()` returns a link;
   the user opens it in a browser and adds photos. Then `list_images()` gives each image's
   `reference`.
-- JPEG, PNG or WebP, up to 5 MB each; an account holds 200 images, 250 MB in all. Saypage
-  re-encodes every image (JPEG, or PNG when it has transparency) and serves it from the
-  page's own address.
-- `list_images` says which pages use each image (`used_by`). `delete_image` removes an
-  image no page uses, to make room: ask the user first. While a page (draft or online)
+- JPEG, PNG or WebP, up to 5 MB each; the plan caps the images an account holds
+  (get_account `plan.limits.image_limit`). Saypage re-encodes every image (JPEG, or PNG
+  when it has transparency) and serves it from the page's own address.
+- `list_images` gives 200 images at a time, newest first (`offset` for the next ones), and
+  says which pages use each (`used_by`). `delete_image` removes an image no page uses
+  (`list_images(unused=true)` lists them), to make room: ask the user first. While a page (draft or online)
   still uses it, remove it from that page and save or publish the page first. A deleted
   image frees its room about half an hour later.
 - Saypage's automatic moderation checks every image when it is uploaded: a refused image is
@@ -122,10 +125,40 @@ when the user has nothing yet, and `funnel-review` reads the results and improve
   `opening_message` and a button (`opening_button_label`) → tapping it sends
   `link_message` with a button (`link_button_label`) to the page. Instagram requires this
   two-step flow.
-- An automation starts its opening DM only after a matching keyword comment. Saypage
-  cannot broadcast DMs to all followers, start a DM sequence without that comment, or
-  read the account's inbox. When the user asks for that, explain the limitation and offer
-  a keyword-triggered automation instead; agree on its setup before creating it.
+- An automation starts only when a follower writes to the account: a keyword comment, a
+  DM, a story reply or a Live comment (see `trigger`). Saypage cannot broadcast DMs to all
+  followers, message anyone who did not just write, or read the account's inbox for the
+  user. When the user asks for that, explain the limitation and offer a keyword-triggered
+  automation instead; agree on its setup before creating it.
+- **What starts it** (`trigger`, fixed once created): `comment` (the default: comments
+  under the chosen post, or the next one), `any_post` (a comment under any post or Reel of
+  the account, including old ones), `live` (a comment during a Live: the first DM must go
+  out while the Live runs), `story_reply` (a reply to any of its stories), `dm` (a DM to
+  the account), `link` (opening the automation's ig.me link) or `ice_breaker` (tapping one
+  of the questions Instagram offers someone opening a first conversation with the
+  account). All but `comment` answer the whole account: give no `provider_media_id`.
+  A DM, a story reply, a link or an ice breaker already opens the conversation, so the
+  follower gets
+  `link_message` straight away (the opening DM only comes first with `email_gate`);
+  comments still go through the button. The keyword `*` answers every story reply or
+  Live comment (never DMs or comments under posts). A post's own automation wins over an
+  `any_post` one, and a story reply no `story_reply` automation answers can go to a `dm`
+  keyword. `public_reply` only exists for `comment` and `any_post`. Tell the user to say
+  the keyword where people will write it: "Reply GUIDE to this story", "DM me GUIDE",
+  "Comment GUIDE during the Live".
+- **"Get it in DMs" links**: a `link` automation's keyword is the link's name (letters,
+  digits, `-`, `_`), and its result gives `dm_link` (`https://ig.me/m/<username>?ref=<name>`)
+  and `qr_code_url`, an SVG QR code to print or download. Opening the link (or scanning the
+  code) in Instagram's app opens a DM with the account and sends `link_message`. Offer it
+  for a page's "Get it in my DMs" button, a newsletter, a bio, a flyer, packaging or a
+  slide at an event: the follower lands in the DMs, where the follow and email gates work.
+  The link does nothing on Instagram's website.
+- **Ice breakers**: an `ice_breaker` automation's keyword is the question as people will
+  read it ("What do you sell?", "Get the free guide 🎁", 80 characters), kept as written.
+  Instagram shows an account's ice breakers, 4 at most, only to people opening their first
+  conversation with it, in its app; a fifth live one is refused. Saypage sends Instagram
+  the questions within a minute of turning one on, pausing or deleting it. Offer them as
+  the account's menu: one per page the user wants new followers to find.
 - `extra_link_buttons` adds up to 2 more buttons to that last message, under the page's
   button: each opens another published page of the user's site (`page_id`) or any web
   address (`url`), for example "Shop" or "YouTube". Offer it when the user wants followers
@@ -147,14 +180,29 @@ when the user has nothing yet, and `funnel-review` reads the results and improve
   website or domain needed. The request must say what the address is for.
   `list_emails` returns the addresses and a CSV download link (15 minutes) to import into
   their email tool; `delete_email` removes one when its owner asks.
+- `reminder_message` sends **one** reminder, about 2 hours later, to a follower who
+  tapped but left the follow request (it carries the same button) or the email request
+  unanswered, and only while at least an hour of Instagram's 24-hour window is left.
+  Nothing can be sent before the tap: Instagram allows the opening DM alone. Offer it with
+  `follow_gate` or `email_gate`, worded as a friendly nudge ("Still want the guide? Follow
+  me and tap below"); an empty `reminder_message` in `update_automation` stops it.
 - Write **every** message and button label in the user's language, including the
   follow-gate ones when `follow_gate` is on and the email request with `email_gate`: the defaults are English, and a DM that
   switches language halfway looks broken. Button labels are 20 characters at most.
 - **Keyword matching**: a comment triggers the automation when it contains the keyword as
   whole words, in any case ("Recipes please 🙌" triggers `RECIPES`, "myrecipes" does
-  not); accents and emoji must match exactly. Replies under other comments count, the
-  account's own comments never do, and when several automations on a post match, the
-  longest keyword wins. The keyword is saved in lowercase (`keyword_note` says so).
+  not). The keyword written differently counts too: other accents ("récette"), a plural,
+  a stretched last letter ("guideee") and, for keywords of 5 letters or more, a typo (one
+  letter, two from 8 letters); emoji must match exactly. Replies under other comments
+  count, the account's own comments never do, and when several automations on a post
+  match, the keyword written as it is beats one written differently, then the longest
+  wins. The keyword is saved in lowercase (`keyword_note` says so), and is unique per
+  post, or per account and kind of trigger.
+- **Several keywords**: `keyword` names the automation and `extra_keywords` lists up to 9
+  more (`["PDF", "EBOOK"]`; a comma inside a keyword is part of it). Any of them starts
+  it, and none can belong to another automation of the same post (or account and kind of
+  trigger). Offer it when followers ask in different words, or languages (`RECIPE` and
+  `RECETTE`). A link's name and an ice breaker's question are one keyword, with no others.
   Someone whose DMs are still under way gets nothing new for another comment; once their
   sequence has ended, a new comment starts a new one.
 - `update_automation` changes the keyword, any message, the link (`page_id` or `url`) or
@@ -172,6 +220,11 @@ when the user has nothing yet, and `funnel-review` reads the results and improve
   caption). `links_sent` counts the comments whose author got the link DM, per comment
   (not per person). For who got what, and where people stopped (first DM not tapped,
   follow request not followed, failures), call `get_automation_activity`.
+- **Contacts**: `list_contacts` gathers everyone the automations DMed into one entry per
+  person across all posts, over 13 months (username, email if given, posts and keywords
+  commented, links received, taps), warmest first; `min_posts: 2` keeps the people who came
+  back. Use it for who the regulars are and what they want: the next Reel, page or offer.
+  It sends nothing, and Saypage never DMs anyone who has not just commented.
 - The page must be published first. When the user wants the DM to open a web address
   they already have (their blog, a recipe, a shop) rather than a Saypage page, pass `url`
   (and a short `url_name`) instead of `page_id`.
@@ -240,16 +293,27 @@ you to act for them.
   stopped. A minute or two later, `list_videos` says `published` (with its `permalink`) or
   `failed` (with the reason). Videos never go on pages, and Saypage deletes one that is not
   published within an hour of its upload: publish it in the same conversation.
-- **Insights**: `get_instagram_insights(days)` (up to 30 days: `reach`, `views`,
-  `accounts_engaged`, `interactions`, `likes`, `comments`, `shares`, `saves`, `replies` (to
-  stories), `contact_button_taps`, `new_followers` and `unfollows`, and today's
-  `followers`, `following` and `posts`; `demographics: true` adds followers by
-  country, age and gender) and `get_instagram_post_insights` (`new_followers` there are the
-  accounts that post won). Every metric carries a `description`; `unavailable` lists what
-  Instagram held back and why (follows, unfollows and demographics need 100 followers;
-  story insights last 24 hours; data can lag 48 hours): give the user that reason rather
-  than guessing. Instagram does not count taps on the bio's links: `get_page_stats` shows
-  the visits Saypage pages get from the bio. Compare posts to explain what worked, then
+- **Insights**: `get_instagram_insights(days)` (up to 30 days: `reach`, also day by day
+  (`daily_reach`) and split into followers and non-followers (`reach_by_follower_status`),
+  `views` and `interactions`, also by format (`views_by_format`: reel, story, post,
+  carousel, ad), `accounts_engaged`, `likes`, `comments`, `shares`, `saves`, `reposts`,
+  `replies` (to stories), `contact_button_taps` by button, `new_followers` and `unfollows`,
+  and today's `followers`, `following` and `posts`; `demographics: true` adds who follows
+  and who engages (`engaged_audience_by_…`), by country, city, age and gender) and
+  `get_instagram_post_insights` (`new_followers` there are the accounts that post won;
+  `bio_link_taps` the taps on the bio's link it led to, for posts and stories; `skip_rate`
+  the share of a Reel's views gone in the first 3 seconds). To review many posts,
+  `list_instagram_posts` with `insights: true` gives every post's numbers and the funnel
+  of each automation on it in one call. Every metric carries a `description`;
+  `unavailable` lists what Instagram held back and why (follows, unfollows and
+  demographics need 100 followers; story insights last 24 hours; data can lag 48 hours):
+  give the user that reason rather than guessing. With `days` over 30,
+  `get_instagram_insights` reads Saypage's own daily `history` (followers, each day's
+  insights and stories, kept since `history_since`), and a post's insights carry its
+  `history` at 1, 3, 7 and 30 days; a story's, recorded at 20 hours, still answers after
+  it expires. Reels get no `new_followers`,
+  `profile_visits` or `bio_link_taps`, and no retention graph. `get_page_stats` shows the
+  visits Saypage pages get from the bio. Compare posts to explain what worked, then
   suggest what to post next.
 - **Page stats**: `get_page_stats(days)` gives each page's views, daily views, where
   visitors came from (`channels`: `instagram_dm` for the automations' DMs, `instagram_bio`

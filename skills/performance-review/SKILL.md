@@ -14,12 +14,15 @@ audience behaves differently.
 
 With Saypage connected (`get_account` first; insights need `can_read_insights`):
 
-- `list_instagram_posts`, following `next_cursor` until you have about 30 posts or 60 days.
-  Leave stories out: they are listed only while live, and their insights end with them.
-- `get_instagram_post_insights` for each post: reach, views, likes, comments, shares and
-  saves, with average watch time for Reels, and profile visits and new followers for feed
-  posts. Instagram gives Reels neither of those last two.
-- `get_instagram_insights` over 30 days for the account as a whole.
+- `list_instagram_posts` with `insights: true`, following `next_cursor` until you have
+  about 30 posts or 60 days: each post's `numbers` hold reach, views, likes, comments,
+  shares, saves and reposts, with watch time and `skip_rate` for Reels, and profile visits,
+  new followers and `bio_link_taps` for feed posts. Instagram gives Reels none of those last
+  three. Leave stories out: they are listed only while live, and their insights end with
+  them. `get_instagram_post_insights` says why a number is `missing` on one post.
+- `get_instagram_insights` over 30 days for the account as a whole, and over 90 or 180 days
+  for the trend: past 30 days it reads Saypage's daily `history` (followers, views, each
+  day's stories), which starts on `history_since`.
 - `get_page_stats` over 30 days: visits per page and channel, and clicks on each page's links.
 - `list_automations`: which posts have a keyword automation behind them.
 
@@ -27,8 +30,9 @@ Without Saypage, ask for screenshots of the insights of the user's last posts.
 
 **State only numbers that a response returned.** When a metric is in `unavailable`, pass on
 its reason (fewer than 100 followers, still processing, expired story) instead of a zero or
-an estimate. The API has no retention graph and no follower/non-follower split: the user
-can screenshot those from the app if they want them in the review.
+an estimate. The API has no retention graph, and splits followers from non-followers only
+for the whole account (`reach_by_follower_status`), never per post: the user can screenshot
+those from the app if they want them in the review.
 
 ## 2. Compute ratios, not totals
 
@@ -40,11 +44,13 @@ A big view count can simply mean a big following. Work out these, showing how:
 | **Shares per 1,000 reach** | shares ÷ reach × 1,000 | worth sending to a friend: the strongest signal |
 | **Saves per 1,000 reach** | saves ÷ reach × 1,000 | useful enough to keep |
 | **Follows per 1,000 reach** | new followers ÷ reach × 1,000, feed posts only | whether the post (and the profile behind it) converts |
+| **Bio-link taps per 1,000 reach** | `bio_link_taps` ÷ reach × 1,000, feed posts and stories | whether the post sends people to the offer |
+| **Skip rate** | `skip_rate`, Reels only, against the median Reel's | whether the opening held people |
 | **Average watch time** | from Reel insights | compare with the Reel's length, if the user knows it |
 
 Report page views from `instagram_dm` separately, with their page and 30-day window: they
-combine every automation sending that page and count page loads, not people, so do not
-attribute them to one post here. `funnel-review` follows one keyword from reach to page
+count page loads, not people. A page's `automations` split them by the automation that sent
+them (since November 2026): only those entries belong to one post. `funnel-review` follows one keyword from reach to page
 visits, and says when those numbers can be set side by side.
 
 Order the posts by breakout ratio first and shares second. Keep formats apart: Reels

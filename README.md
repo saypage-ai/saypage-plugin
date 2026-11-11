@@ -25,6 +25,8 @@ There is no dashboard: everything happens in the conversation.
   | `opportunity-scan` | The sales you're leaving on the table right now, closest to buying first: unanswered keywords, buyers, Reels with nowhere to go |
   | `reel-funnel` | One Reel's whole path to a sale, built and tested: the keyword, the DMs, a page made for it, the button to your checkout |
   | `offer-finder` | What to sell, from what your followers already ask for: one offer, prices to try and a way to test the demand first |
+  | `sales-attribution` | Which Reels sold: your Saypage numbers joined with your shop's orders, through a tagged link, the email or a code per Reel |
+  | `media-kit` | Get paid by brands: a media kit page from your real numbers, including how many people act when you ask, a price to quote and the pitch to send |
   | `funnel-review` | Where your funnels lose people, compared step by step, with one change at a time and a check that it worked |
   | `reel-analysis` | One Reel read in depth, or two compared: why it worked or flopped, and what to keep, change or remake |
   | `reel-script` | One idea into a Reel: three hooks of different types, the script in your voice, on-screen text, a shot list |
@@ -79,6 +81,8 @@ creates an automation, or posts or replies on Instagram. Publishing posts is opt
 until you approve it on Instagram yourself; you can turn it off at any time.
 
 ## Data
+
+Saypage passed Meta App Review for the Instagram permissions it uses.
 
 When you use the connector, your assistant sends Saypage what each request needs: the pages
 it writes, the images and videos you upload, automation keywords and messages, and the

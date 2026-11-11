@@ -28,14 +28,15 @@ seconds it names):
 |---|---|
 | Views and reach | `get_instagram_post_insights` on the automation's post (an ad has none) |
 | Keyword comments | `triggered` and `people` in `get_automation_activity`; a post's `comments` also hold the account's own replies |
+| Raised hands it missed | `missed` there (30 days): the keyword while it was off, another spelling, or a plain ask for the link, from people it never DMed |
 | First DM sent | `first_dm_sent` |
 | Tapped | `tapped` |
 | Gates | `asked_to_follow`; `asked_for_email` and `gave_email` |
 | Links sent | `links_sent` |
 | Stopped | `not_sent` by cause: `never_tapped` (got the first DM, did not tap), `window_expired`, `plan_limit` |
-| Page loads from DMs | `instagram_dm` for this page, in `get_page_stats` |
-| Clicks from DMs | `instagram_dm` in this page's `click_channels`; `destinations` names the links |
-| Sales or bookings | only from the user: ask for the number in their shop or booking tool |
+| Page loads from DMs | this automation's `views` in the page's `automations`, in `get_page_stats` (or `page_views` in `list_instagram_posts` with `insights: true`); before November 2026, only `instagram_dm` for the whole page |
+| Clicks from DMs | this automation's `clicks` there (`page_clicks`); `destinations` names the links |
+| Sales or bookings | only from the user's shop or booking tool: `sales-attribution` joins its orders with the funnel by a tagged link, the email or a code |
 
 Ask how many sales or bookings came in since the funnel started, and whether their tool shows
 the link's tag. If they have no number, say the path stops at the click, and that a tagged
@@ -53,8 +54,11 @@ that are plainly theirs can be most of the numbers. An automation counts from it
 These tools count over different windows. Before putting page loads next to `links_sent`,
 all three must hold:
 
-1. **This automation alone sends this page**, as its main link or an extra button
-   (`list_automations`).
+1. **The page loads are this automation's own**: its entry in the page's `automations`,
+   which Saypage counts since it began tagging DM links per automation (November 2026). For
+   loads before then, or a funnel older than that, only the page's `instagram_dm` total
+   exists: it belongs to one automation only if this automation alone sends the page, as
+   its main link or an extra button (`list_automations`).
 2. **`days` covers the whole life of the funnel.** `get_page_stats` goes back 90 days, while
    the activity summary covers 13 months.
 3. **The automation stayed on this post.** An automation moved from another Reel carries
@@ -105,7 +109,7 @@ measures of step 3. Then:
 | What you see | Usual cause | Fix |
 |---|---|---|
 | Reach, few keyword comments | the ask comes late, is not said aloud, or promises little | the ask, in `reel-script` and `instagram-caption` |
-| Many comments, few `triggered` | people write another word | read `list_instagram_comments` (skip `by_you`), then change the keyword (`update_automation`) |
+| Many comments, few `triggered` | people write another word | `missed` shows which (`near_keyword`, `asked_for_link`); then widen or change the keyword (`update_automation`) |
 | `not_sent` with cause `plan_limit` | the plan's monthly DM limit | compare `plan.dms_this_month` with `plan.limits.monthly_dm_limit`, and tell the user plainly |
 | `not_sent` with cause `window_expired` | Instagram's 24-hour window closed before the next DM | fewer steps or a shorter gate; a closed window cannot be reopened |
 | `failed` as a `stage` in `recent` | delivery problem | give each `reason`; do not guess |

@@ -16,13 +16,15 @@ If `sales-plan` already ran in this conversation, reuse what it read and fetch n
 Otherwise, tell the user this takes a minute or two, then read:
 
 - `get_account`, and `list_instagram_posts` over about 60 days, 30 Reels at most.
-- `get_instagram_post_insights` on those Reels: the list holds no views.
+- `insights: true` on that list: each post's `numbers` hold its views and its
+  automations' funnel.
 - `list_automations`, then `get_automation_activity` on ten at most: those with the most
   `links_sent`, then those on the newest Reels. It allows about six calls a minute: when it
   refuses, wait the seconds it names.
 - `list_pages`, and `get_page_stats` over 90 days.
 - `list_instagram_comments` on the five Reels with the most comments.
 - `list_emails`, for `total` only. Never repeat an address.
+- `list_contacts` with `min_posts: 2`, for `summary` and the keywords regulars ask for.
 
 While you read:
 
@@ -45,6 +47,7 @@ While you read:
 | A keyword nobody answers | a post's `comment_keyword` with no active automation on it | an automation on that post and keyword (`reel-funnel`) |
 | Buyers left unanswered | comments asking a price, a link, how to buy, whether it ships, with no real reply | a public answer (`comment-replies`) |
 | A word people keep using | the same word in many comments ("recipe", "link"), or a near miss of the keyword, with no automation behind it | an automation on that word: it needs no caption edit |
+| Raised hands an automation missed | `missed` in `get_automation_activity`: `keyword` (commented while it was off), `near_keyword` (another spelling), `asked_for_link`, each a person it never DMed | widen the keyword or add one for that word (`update_automation`), answer them publicly (`comment-replies`), and keep it on while the Reel draws comments |
 | Comments lost to the DM limit | `not_sent` with cause `plan_limit` | tell the user plainly: those comments are never answered later |
 
 Count only comments from the last 14 days (`commented_at`) as live demand, and show older ones
@@ -59,6 +62,7 @@ apart: new comments are what an automation can catch, since it never answers old
 | A generic destination | the automation's `page_id` is the home page or a list of links (`list_pages` gives the path), not a page for that Reel | a page made for that Reel (`reel-funnel`) |
 | A page that hides the offer | among the three pages with the most visits, `get_page` shows no price, or no main button to the offer | add them, then `publish_page` with the user's go-ahead |
 | Emails nobody wrote to | `total` in `list_emails` is above 0, and the user has not used them | a message in their own email tool: `csv_url` gives the file, and Saypage sends no email |
+| Regulars with nothing to buy | `came_back` in `list_contacts` is in the dozens, and no page they reach sells anything | an offer for them (`offer-finder`), from the keywords they keep commenting |
 
 ### People the Reels already reach
 

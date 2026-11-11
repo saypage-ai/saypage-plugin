@@ -19,14 +19,17 @@ Tell the user this takes a few minutes, then start with `get_account`. If no Ins
 is connected, or `can_read_insights` is false, follow the `saypage` skill first. Then read, in
 this order:
 
-1. **Reels**: `list_instagram_posts`, following `next_cursor` until you have 60 days of posts
-   or 30 Reels, whichever comes first. Then `get_instagram_post_insights` on each of those
-   Reels: the list holds no views or reach, and the analysis rests on them.
+1. **Reels**: `list_instagram_posts` with `insights: true`, following `next_cursor` until
+   you have 60 days of posts or 30 Reels, whichever comes first. Each post's `numbers` hold
+   its views, reach and the rest, and each automation on it with `triggered`, `links_sent`
+   and `triggered_per_1000_views`: the analysis rests on them.
 2. **The account**: `get_instagram_insights` over 30 days, with `demographics: true` from 100
    followers.
-3. **Automations**: `list_automations`, then `get_automation_activity` on ten at most: those
-   with the most `links_sent`, then those on the newest Reels. This tool allows about six calls
-   a minute: when it refuses, wait the seconds it names.
+3. **Automations**: `list_automations` for their messages and gates; step 1 already gave each
+   one's `triggered`, `tapped` and `links_sent`. Then `get_automation_activity` on five at
+   most, for where people stopped and the raised hands it `missed`: those with the most
+   `triggered`, then those on the newest Reels. This tool allows about six calls a minute: when it refuses, wait the seconds it
+   names.
 4. **Pages**: `list_pages`, `get_page_stats` over 90 days, then `get_page` on the two pages
    with the most `instagram_dm` loads and the page sent by the newest live Reel. A page is
    long, and this is its draft: look for its promise, its price, and where its buttons go.

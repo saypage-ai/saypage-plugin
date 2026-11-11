@@ -49,6 +49,9 @@ Sort what you find, and count it:
   something worth paying for.
 - **What already pulls**: `links_sent` in `list_automations` and page views in
   `get_page_stats`, when the user has any.
+- **Who keeps coming back**: `list_contacts` with `min_posts: 2`. The keywords regulars
+  comment again and again are the strongest demand there is, and the first buyers of an
+  offer are usually among them.
 
 Give the size of the sample with every finding. Fewer than about ten comments on a theme is
 a hunch: treat it as one, and lean on the test in step 6. Quote comments word for word,

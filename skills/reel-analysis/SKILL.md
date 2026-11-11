@@ -14,7 +14,8 @@ sure that reason is. `performance-review` compares posts over weeks; this one go
 
 Saypage gives the Reel's numbers, caption, cover and comments. It cannot watch the video, and
 Instagram's API gives no Reel length, retention graph, follower split, `new_followers` or
-`profile_visits` for Reels.
+`profile_visits` for Reels. It does give `skip_rate`: the share of views that left within the
+first 3 seconds.
 
 So ask, in one message, for what would sharpen the analysis: the Reel's length, the first line
 said and the first text on screen, and, if they have it, a screenshot of the retention graph
@@ -28,11 +29,15 @@ last Reel". Then:
 - `get_instagram_post`: the whole caption, `comment_keyword` and the cover. Look at the cover
   if you can open images. `media_product_type: "AD"` means an ad, which has no insights: say so,
   and read only its comments and automation.
-- `get_instagram_post_insights`: reach, views, likes, comments, shares, saves,
-  `average_watch_time_ms`, `total_watch_time_ms`.
-- **The baseline**: the same insights for 10 to 15 other recent Reels, leaving out any under
-  48 hours old and counting a Reel posted twice once. Work from medians: one hit would skew an
-  average.
+- `get_instagram_post_insights`: reach, views, likes, comments, shares, saves, reposts,
+  `skip_rate`, `average_watch_time_ms`, `total_watch_time_ms`.
+- **The baseline**: the same insights for 10 to 15 other recent Reels, from
+  `list_instagram_posts` with `insights: true` (one call per page of posts), leaving out any
+  under 48 hours old and counting a Reel posted twice once. Work from medians: one hit would
+  skew an average.
+- **The pace**: the Reel's `history` in its insights holds its numbers at 1, 3, 7 and 30
+  days. Set its views at 1 day against other Reels' at the same age: a Reel at 3x the median
+  on day 1 took off; one that keeps gaining after day 7 is still being shown.
 - `list_instagram_comments`, following `next_cursor` up to about 100 comments.
 - `list_automations`, and `get_automation_activity` if one answers this Reel.
 
@@ -45,7 +50,7 @@ Numbers for a Reel under 48 hours old are still moving: say so, and keep the ver
 | Stage | Measure | Question |
 |---|---|---|
 | Reach | `views` ÷ median views | Did Instagram show it? |
-| Hold | `average_watch_time_ms` ÷ the Reel's length, or against the median watch time; `views` ÷ reach | Did people stay, or watch again? |
+| Hold | `skip_rate` against the median Reel's; `average_watch_time_ms` ÷ the Reel's length, or against the median watch time; `views` ÷ reach | Did the opening hold them, did they stay, or watch again? |
 | Value | shares and saves per 1,000 reach, against the median | Was it worth keeping or sending? |
 | Action | `triggered` per 1,000 views with an automation, otherwise other people's comments per 1,000 views | Did people raise a hand? |
 | Sale | the automation's path, and sales if the user gives a number | Did it lead anywhere? |
