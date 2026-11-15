@@ -56,10 +56,10 @@ new version that goes live counts toward the plan's page updates a month
 for in the draft, then publish once.
 
 **Plans.** `get_account` names the user's plan (`plan.name`). On **Free** (`plan.tier`
-`none`), Saypage connects their Instagram to you: posts, comments (reading, replying,
+`none`) and **Connector** (`connector`), Saypage connects their Instagram to you: posts, comments (reading, replying,
 hiding, deleting), insights and publishing all work, pages can be drafted and previewed,
 and one page goes online, the home page (path /, the address for their Instagram bio).
-Every other page and every automation come with Creator or Premium. When a Free user
+Every other page and every automation come with Creator or Premium. When such a user
 wants another page or an automation, build it all the same (the page with its preview,
 the automation as a draft) so they see what they would get, then say plainly, once, what
 needs another plan. The refusal links the page describing the plans:
@@ -228,7 +228,7 @@ joins them with the user's own shop to say which Reels sold.
 - The page must be published first. When the user wants the DM to open a web address
   they already have (their blog, a recipe, a shop) rather than a Saypage page, pass `url`
   (and a short `url_name`) instead of `page_id`.
-- The Free plan runs no automation: `create_automation` keeps it as a draft
+- Free and Connector run no automation: `create_automation` keeps it as a draft
   (`activated: false`), ready to turn on once the plan includes automations. The earlier
   free plan (kept by older accounts) runs one, on a post the user picks (arming for the
   next post is paid). Say so plainly when `create_automation` answers with a plan limit.
@@ -338,8 +338,8 @@ Every error says what is wrong: fix exactly that and try again. A page's problem
 |---|---|
 | Publishing is closed on this account | Saypage refused or took down several of the user's pages. Tell them; they can contest by replying to Saypage's email. Do not work around it |
 | Connect your Instagram professional account first | `connect_instagram` |
-| the Free plan puts one page online, the home page | Tell the user plainly; the draft and its preview are kept, and their home page (path /) can go online. Share the plans page as information when it helps, not an upgrade pitch |
-| the Free plan runs no automation | Tell the user plainly; the automation is kept as a draft. Share the plans page as information when it helps, not an upgrade pitch |
+| the user's plan puts one page online, the home page | Tell the user plainly; the draft and its preview are kept, and their home page (path /) can go online. Share the plans page as information when it helps, not an upgrade pitch |
+| the user's plan runs no automation | Tell the user plainly; the automation is kept as a draft. Share the plans page as information when it helps, not an upgrade pitch |
 | your plan publishes 1 page at a time | Tell the user which page is online. Only if they choose to take it offline for this one, `unpublish_page` that page, then publish again; never pick a page yourself. The plans page it links is information to share when it helps, not an upgrade pitch |
 | your plan allows 10 page updates a month | Tell the user the draft is kept and when they can publish again (the message says). Keep editing and previewing if they want; never retry. Share the plans page as information when it helps, not an upgrade pitch |
 | Publishing posts is optional and turned off | Tell the user; `get_instagram_publishing_link` only if they want it |
