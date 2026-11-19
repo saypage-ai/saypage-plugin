@@ -51,9 +51,10 @@ the shop closes late" rather than "pasta".
   it sends (an existing one from `list_pages`, or one to build with `reel-funnel`). An Offer
   post needs something to sell: if the user has nothing yet, start with `offer-finder`.
 - **The automation**: note which ones to create and on which post. Check the plan's limits
-  in `get_account` before promising one on every post. On the Free plan none runs yet:
+  in `get_account` before promising one on every post. On the Connector plan none runs yet:
   plan the asks and build the pages all the same, and say once that they go live with a
-  plan that includes them ("Plans" in the `saypage` skill).
+  plan that includes them. On the Free plan, plan the asks only: pages and automations
+  need a plan ("Plans" in the `saypage` skill).
 - **The bio**: if the plan pushes people to the bio link, make sure it leads to a page
   that matches the offer (`profile-review`).
 

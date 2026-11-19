@@ -44,8 +44,9 @@ and an automation sends the page.
 
 Look at the plan's limits in `get_account` before offering an automation on every post.
 A good start is one automation on the strongest post, and the same page in the bio link.
-On the Free plan the page and the automation are built and previewed, and go live with a
-plan that includes them: say so once ("Plans" in the `saypage` skill).
+On the Connector plan the page and the automation are built and previewed, and go live
+with a plan that includes them: say so once. On the Free plan neither can be built: say
+once that they need a plan ("Plans" in the `saypage` skill).
 
 ## 4. Lay out the week
 

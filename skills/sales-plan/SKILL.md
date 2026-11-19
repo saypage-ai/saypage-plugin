@@ -19,8 +19,8 @@ Tell the user this takes a few minutes, then start with `get_account`. If no Ins
 is connected, or `can_read_insights` is false, follow the `saypage` skill first. Then read, in
 this order:
 
-1. **Reels**: `list_instagram_posts` with `insights: true`, following `next_cursor` until
-   you have 60 days of posts or 30 Reels, whichever comes first. Each post's `numbers` hold
+1. **Reels**: `list_instagram_posts` with `insights: true` and `limit: 48`, following
+   `next_cursor` until you have 60 days of posts or 30 Reels, whichever comes first. Each post's `numbers` hold
    its views, reach and the rest, and each automation on it with `triggered`, `links_sent`
    and `triggered_per_1000_views`: the analysis rests on them.
 2. **The account**: `get_instagram_insights` over 30 days, with `demographics: true` from 100
@@ -164,9 +164,11 @@ skill that does it, and the number that should move.
 - **Forecast no revenue.** Name the number to watch instead.
 - **Say what you could not see**: sales, retention within a Reel, ads' reach, and anything in
   `unavailable`.
-- **Respect the plan.** `get_account` names it. On Free, no automation runs and only the home
-  page goes online: write the plan all the same, build those actions as drafts and previews,
-  and say once what they need ("Plans" in the `saypage` skill), as information.
+- **Respect the plan.** `get_account` names it. On Connector, no automation runs and only
+  the home page goes online: write the plan all the same, build those actions as drafts and
+  previews, and say once what they need. On Free, Saypage only reads posts and insights:
+  write the plan, build nothing, and say once what it needs ("Plans" in the `saypage`
+  skill), as information.
 
 ## Output
 

@@ -84,8 +84,10 @@ automation whose post seems gone (`get_instagram_post` finds no post), for the u
 3. **Effort**: what can happen in this conversation comes before what needs filming.
 
 Keep five at most. Name what you looked at and left out, so the user sees the scan was real.
-On Free, keep the opportunities that need an automation or another page online, build them
-as drafts and previews, and say once what they need ("Plans" in the `saypage` skill).
+On Connector, keep the opportunities that need an automation or another page online, build
+them as drafts and previews, and say once what they need. On Free, where Saypage only reads
+posts and insights, keep them too but build nothing: say once what they need ("Plans" in
+the `saypage` skill).
 
 ## Output
 

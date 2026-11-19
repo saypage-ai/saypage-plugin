@@ -29,10 +29,18 @@ user's name. Use medians rather than the best post, and never round up past what
 measured. When Instagram holds a metric back (`unavailable`), leave it off and say why;
 never write 0.
 
-On **Free** (`plan.tier` `none`) only the home page goes online. Build the kit as its own
-page all the same and show the preview, say once that it goes live with Creator or Premium,
-and offer the Free version: a short "Work with me" section on the home page, with the three
-strongest numbers and the contact button.
+**The plan decides how far this goes** (`plan.tier` in `get_account`):
+
+- On **Free** (`none`), Saypage only reads posts and insights: no page can be created,
+  previewed or published. Do steps 1 and 2, then give the kit in the conversation (the
+  numbers, the rate from step 4 and the pitch from step 5) for the user to send as text.
+  Say once that the hosted page comes with a plan ("Plans" in the `saypage` skill), and do
+  not call the page tools.
+- On **Connector** (`connector`) only the home page goes online. Build the kit as its own
+  page all the same and show the preview, say once that it goes live with Creator or
+  Premium, and offer the Connector version: a short "Work with me" section on the home
+  page, with the three strongest numbers and the contact button.
+- On **Creator** and **Premium** the kit is its own page, online.
 
 ## 1. Ask what the numbers can't say
 

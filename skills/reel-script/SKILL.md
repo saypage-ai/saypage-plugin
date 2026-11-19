@@ -86,9 +86,10 @@ the full recipe." Then, with Saypage:
 - Offer to build that page, made for this Reel (the `saypage` skill: `get_page_guide`
   first), and to create the comment-to-DM automation once the Reel is posted, with the
   user's approval. This is what turns the Reel's views into followers and customers: the
-  commenters get what they asked for in seconds, from the user. On the Free plan both are
-  built and previewed, and go live with a plan that includes them ("Plans" in the
-  `saypage` skill).
+  commenters get what they asked for in seconds, from the user. On the Connector plan both
+  are built and previewed, and go live with a plan that includes them; on the Free plan
+  neither can be built, so say once that they need a plan ("Plans" in the `saypage`
+  skill).
 - When this Reel is meant to sell, `reel-funnel` builds the whole path and tests it.
 - The keyword rules are in `instagram-caption`; write the caption with that skill too.
 

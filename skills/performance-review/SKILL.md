@@ -14,8 +14,8 @@ audience behaves differently.
 
 With Saypage connected (`get_account` first; insights need `can_read_insights`):
 
-- `list_instagram_posts` with `insights: true`, following `next_cursor` until you have
-  about 30 posts or 60 days: each post's `numbers` hold reach, views, likes, comments,
+- `list_instagram_posts` with `insights: true` and `limit: 48` (one call usually covers
+  it), following `next_cursor` until you have about 30 posts or 60 days: each post's `numbers` hold reach, views, likes, comments,
   shares, saves and reposts, with watch time and `skip_rate` for Reels, and profile visits,
   new followers and `bio_link_taps` for feed posts. Instagram gives Reels none of those last
   three. Leave stories out: they are listed only while live, and their insights end with

@@ -77,8 +77,9 @@ step 1. Show `preview_page`, and call `publish_page` once the user agrees.
   `?utm_source=instagram&utm_campaign=pasta`, with the keyword as the campaign. Saypage counts
   the click but never sees the sale, so this tag is how their own tool can show which Reel
   sold.
-- **On the Free plan** only the home page goes online: build this page and show its preview
-  all the same, then say once what it needs ("Plans" in the `saypage` skill).
+- **On the Connector plan** only the home page goes online: build this page and show its
+  preview all the same, then say once what it needs. **On the Free plan** nothing is built:
+  say once what the page would do and that it needs a plan ("Plans" in the `saypage` skill).
 
 ## 5. The DMs
 
@@ -93,8 +94,9 @@ Write them with `dm-writing`, and let the user choose the words.
 ## 6. Turn it on
 
 Show the whole path in one block (post, keyword, messages, gate, page, link) and **ask**.
-Then `create_automation`. If it answers `activated: false`, give its `reason`: on the Free
-plan it stays a draft, ready for later. Never create a second one for the same post and
+Then `create_automation`. If it answers `activated: false`, give its `reason`: on the
+Connector plan it stays a draft, ready for later. On the Free plan it is refused: do not
+retry, say once that it needs a plan. Never create a second one for the same post and
 keyword: `update_automation` changes anything later and keeps the history.
 
 ## 7. Walk the path
