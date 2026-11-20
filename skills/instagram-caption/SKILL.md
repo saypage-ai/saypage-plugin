@@ -77,7 +77,7 @@ over `#food`); local businesses add a place (`#lyonfood`). Skip `#explore`, `#re
 - One ask, and a keyword that an automation answers (or the user knows it needs one).
 - Five hashtags at most, no URL in the caption.
 - Every fact comes from the user.
-- The `natural-voice` pass is done.
+- The caption went through the `natural-voice` skill.
 
 ## Output
 

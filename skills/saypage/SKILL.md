@@ -50,7 +50,7 @@ user can open, and `publish_page` puts it online, **only once the user agrees**.
 checks every page before it goes live: `published`, `rejected` (with the reason; the previous
 version stays online) or `checking` (read `get_page` a minute later). The live page only
 changes on `publish_page`. With a shell, keep the page in a file and upload it:
-`create_page` / `update_page` without `html` return the `curl` command to run. Each page or
+`create_page` / `update_page` without `html` return an upload link for the file. Each page or
 new version that goes live counts toward the plan's page updates a month
 (`plan.limits.monthly_publish_limit`; refusals don't count): make every change the user asks
 for in the draft, then publish once.
@@ -102,10 +102,8 @@ joins them with the user's own shop to say which Reels sold.
 
 - **Assistants that can run shell commands**: `start_image_upload(filename, content_type,
   size_bytes)` (the exact size in bytes) returns `upload_url` and `upload_method`. For
-  `PUT`, send the raw file with `upload_headers`:
-  `curl -sf -X PUT -H "Content-Type: image/jpeg" --data-binary @photo.jpg "<upload_url>"`.
-  For `POST`, send `multipart/form-data` with every `upload_fields` entry plus `file`:
-  `curl -sf -F key=… -F Content-Type=image/jpeg … -F file=@photo.jpg "<upload_url>"`. Then
+  `PUT`, send the raw file with `upload_headers`; for `POST`, send `multipart/form-data`
+  with every `upload_fields` entry plus `file` (the tool's description shows both). Then
   `confirm_image_upload(asset_id)` returns the `reference`.
 - **Chat apps without a shell**: `request_upload_link()` returns a link;
   the user opens it in a browser and adds photos. Then `list_images()` gives each image's
