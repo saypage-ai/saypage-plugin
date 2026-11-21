@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "saypage",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Build and host web pages (link in bio, menus, guides, recipe pages) on your own saypage.page address, send them by Instagram DM to followers who comment a keyword, manage your Instagram comments, posts and insights from the conversation, write Reels, captions, carousels and weekly content calendars, turn a Reel's views into customers with a page, a keyword DM and a review of each step, and get paid by brands with a media kit page built from your real numbers.",
   "author": {
     "name": "Twist Labs",
